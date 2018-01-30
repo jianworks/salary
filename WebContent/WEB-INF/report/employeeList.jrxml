@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="employList" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="97a46ddf-2d61-4ea5-a2cf-97ed3474b5b2">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="employeeno" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="unicode" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="accountno" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-1" x="6" y="0" width="528" height="32" uuid="7a921f59-5997-4e59-a6ac-230b49eb04b5"/>
+				<textElement textAlignment="Center">
+					<font fontName="新細明體" size="18" pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[員工基本資料表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-2" x="444" y="8" width="36" height="15" uuid="073ca7bc-42cd-4675-a3e5-bb74862c45af"/>
+				<textElement>
+					<font pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[頁次：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="495" y="8" width="8" height="15" uuid="77fcd95b-44d5-4ffe-ab2a-585b47556284"/>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField" x="507" y="8" width="18" height="15" uuid="deb2e799-a782-4b24-bb1d-be0f459316f5"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-1" x="0" y="24" width="534" height="1" uuid="6bd46060-de68-43bf-a4fd-22cdf1cdd697"/>
+			</line>
+			<textField evaluationTime="Report" pattern="yyyy/MM/dd" isBlankWhenNull="false">
+				<reportElement key="textField" x="56" y="8" width="134" height="15" uuid="f3861e7a-4483-43c0-ac01-5818bac904a0"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-12" x="0" y="8" width="72" height="17" uuid="dc5e170f-644a-4fd8-ae20-843673940a9a"/>
+				<textElement textAlignment="Left">
+					<font pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[製表日期：]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="480" y="8" width="15" height="17" uuid="6c81a1ca-c4ab-4ba0-9e24-ee7858246497"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-5" x="1" y="4" width="71" height="17" uuid="f56fde6c-9409-4682-8742-ec0a7c0cf55a"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[員工編號]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" x="71" y="4" width="74" height="17" uuid="a9122682-e56e-4a8c-b801-15ac5ccb6d33"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[職稱]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" x="145" y="4" width="72" height="17" uuid="8b69fb95-a879-402f-bbd1-08a32eed9eac"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[姓名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-8" x="217" y="4" width="72" height="17" uuid="0d1d2199-658c-42ff-9dbc-7426ae30dd18"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[身份證號]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-10" x="288" y="4" width="174" height="17" uuid="20c399ba-bd76-47be-adc2-f2131b17c92d"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[住址]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-11" x="461" y="4" width="74" height="17" uuid="ec25dffa-6ce7-4d3b-8674-b9ec431374c5"/>
+				<textElement textAlignment="Center">
+					<font pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[銀行帳號]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-2" x="0" y="26" width="535" height="1" uuid="5c065612-7eb5-4513-b136-48f6861f1e98"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-1" x="144" y="4" width="74" height="19" uuid="51709ea3-5723-4ab5-bfd4-9a0ff153fb49"/>
+				<textElement>
+					<font fontName="新細明體" pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-2" x="1" y="4" width="70" height="19" uuid="0b3731e9-2212-4766-bb46-7a3736f29c4d"/>
+				<textFieldExpression><![CDATA[$F{employeeno}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-3" x="72" y="4" width="73" height="19" uuid="c5961b8e-b587-4ba7-b641-a328b8ef1f96"/>
+				<textElement>
+					<font fontName="新細明體" pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-4" x="217" y="4" width="72" height="19" uuid="3f8fa2c6-ae80-430e-a933-00474b955b6e"/>
+				<textElement>
+					<font fontName="新細明體" pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unicode}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-5" x="288" y="4" width="174" height="19" uuid="5d4631eb-7bfa-4fda-8d07-a838cd99e5b1"/>
+				<textElement>
+					<font fontName="新細明體" pdfFontName="MHei-Medium" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-6" x="462" y="4" width="73" height="19" uuid="eb81b5dd-ff27-4dbb-b935-706eb4a3bec4"/>
+				<textFieldExpression><![CDATA[$F{accountno}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="50" splitType="Stretch"/>
+	</lastPageFooter>
+	<summary>
+		<band height="50" splitType="Stretch"/>
+	</summary>
+</jasperReport>

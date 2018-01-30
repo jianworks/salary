@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN/EN" "http://www.springframework.org/dtd/spring-beans.dtd"> 
+<beans> 
+	<bean id="resources" class = "com.csjian.util.Resources">
+		<constructor-arg index="0">
+			<value>/ApplicationResources.xml</value>
+		</constructor-arg>
+	</bean>	
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName"> 
+            <value>com.mysql.jdbc.Driver</value> 
+        </property> 
+        <property name="url"> 
+            <value>jdbc:mysql://main:3306/4545</value> 
+        </property> 
+        <property name="username"> 
+            <value>root</value> 
+        </property> 
+        <property name="password"> 
+            <value>m02d14</value> 
+        </property> 
+        <property name = "maxActive">
+          <value>10</value>
+        </property>  
+        <property name="maxWait">
+          <value>5000</value>
+        </property>
+	</bean>	
+	
+    <bean id="daoFactory" class="com.csjian.mysqlimpl.StackPoolDaoFactory">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+    	</property>
+	</bean>
+	
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"> 
+        <property name="mappings"> 
+            <props> 
+                <prop key="home.do">homeController</prop> 
+            </props> 
+        </property> 
+    </bean> 
+    
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+        <property name="viewClass"> 
+            <value>org.springframework.web.servlet.view.InternalResourceView</value> 
+        </property> 
+        <property name="prefix"> 
+            <value>/WEB-INF/jsp/</value> 
+        </property> 
+        <property name="suffix"> 
+            <value>.jsp</value> 
+        </property> 
+    </bean> 
+
+    <bean id="paraMethodResolver" 
+        class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"> 
+        <property name="paramName"><value>action</value></property> 
+        <property name="defaultMethodName"><value>welcome</value></property> 
+    </bean> 
+    
+    <bean id="sessionHelper" class="com.csjian.controller.SessionHelper" />
+    
+    <bean id="homeController" class="com.csjian.controller.HomeController"> 
+        <property name="methodNameResolver"> 
+            <ref bean="paraMethodResolver"/> 
+        </property> 
+        <property name="sessionHelper">
+            <ref bean="sessionHelper"/>
+        </property>
+        <property name="resources">
+            <ref bean="resources"/>
+        </property>
+        <property name="daoFactory">
+            <ref bean="daoFactory"/>
+        </property>
+    </bean> 	
+</beans>

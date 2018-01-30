@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="employList"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+	<field name="name" class="java.lang.String"/>
+	<field name="employeeno" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="unicode" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="accountno" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="32"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="6"
+						y="0"
+						width="528"
+						height="32"
+						key="staticText-1"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="新細明體" pdfFontName="MHei-Medium" size="18" isPdfEmbedded ="true" pdfEncoding ="UniCNS-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[員工基本資料表]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="25"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="444"
+						y="8"
+						width="36"
+						height="15"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="MHei-Medium" isPdfEmbedded ="true" pdfEncoding ="UniCNS-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[頁次：]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="495"
+						y="8"
+						width="8"
+						height="15"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[/]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="507"
+						y="8"
+						width="18"
+						height="15"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="24"
+						width="534"
+						height="0"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="56"
+						y="8"
+						width="134"
+						height="15"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="0"
+						y="8"
+						width="72"
+						height="17"
+						key="staticText-12"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font pdfFontName="MHei-Medium" isPdfEmbedded ="true" pdfEncoding ="UniCNS-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[製表日期：]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="480"
+						y="8"
+						width="15"
+						height="17"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="30"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="1"
+						y="4"
+						width="71"
+						height="17"
+						key="staticText-5"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font pdfFontName="MHei-Medium" isPdfEmbedded ="true" pdfEncoding ="UniCNS-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[員工編號]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="71"
+						y="4"
+						width="74"
+						height="17"
+						key="staticText-6"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font pdfFontName="MHei-Medium" isPdfEmbedded ="true" pdfEncoding ="UniCNS-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[職稱]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="145"
+						y="4"
+						width="72"
+						height="17"
+						key="staticText-7"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font pdfFontName="MHei-Medium" isPdfEmbedded ="true" pdfEncoding ="UniCNS-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[姓名]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="217"
+						y="4"
+						width="72"
+						height="17"
+						key="staticText-8"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font pdfFontName="MHei-Medium" isPdfEmbedded ="true" pdfEncoding ="UniCNS-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[身份證號]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="288"
+						y="4"
+						width="174"
+						height="17"
+						key="staticText-10"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font pdfFontName="MHei-Medium" isPdfEmbedded ="true" pdfEncoding ="UniCNS-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[住址]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="461"
+						y="4"
+						width="74"
+						height="17"
+						key="staticText-11"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font pdfFontName="MHei-Medium" isPdfEmbedded ="true" pdfEncoding ="UniCNS-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[銀行帳號]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="26"
+						width="535"
+						height="0"
+						key="line-2"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="100"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="4"
+						width="74"
+						height="19"
+						key="textField-1"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="4"
+						width="70"
+						height="19"
+						key="textField-2"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{employeeno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="72"
+						y="4"
+						width="73"
+						height="19"
+						key="textField-3"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="217"
+						y="4"
+						width="72"
+						height="19"
+						key="textField-4"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{unicode}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="288"
+						y="4"
+						width="174"
+						height="19"
+						key="textField-5"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{address}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="462"
+						y="4"
+						width="73"
+						height="19"
+						key="textField-6"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{accountno}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

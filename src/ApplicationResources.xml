@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<properties>
+	<!-- 資料庫設定 -->
+	<entry key="db.driver">com.microsoft.sqlserver.jdbc.SQLServerDriver</entry>
+	<entry key="db.url">jdbc:sqlserver://192.168.195.1\SQLEXPRESS:1433;databaseName=Salary;user=sa;password=admin;</entry>
+	<entry key="db.user">sa</entry>
+	<entry key="db.password">admin</entry>
+	
+	<!-- smpt 設定  -->
+	<entry key="smtp.host">main</entry>
+	<entry key="smtp.user"></entry>
+	<entry key="smtp.password"></entry>
+	<entry key="smtp.from">sales@csjian.com</entry>
+	
+	<entry key="file.path">c:/Test/</entry>
+	
+	<!-- 其他參數 -->
+	<entry key="page.sizes">20</entry>
+</properties>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN/EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="resources" class="com.csjian.util.Resources">
+		<constructor-arg index="0">
+			<value>/ApplicationResources.xml</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"> -->
+	<bean id="dataSource2"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.microsoft.sqlserver.jdbc.SQLServerDriver</value>
+			<!--<value>com.mysql.jdbc.Driver</value> -->
+		</property>
+		<property name="url">
+			<value>jdbc:sqlserver://192.168.195.1\SQLEXPRESS:1433;databaseName=Salary;user=sa;password=admin;</value>
+		</property>
+		<property name="username">
+			<value>sa</value>
+		</property>
+		<property name="password">
+			<value>admin</value>
+		</property><!-- <property name="maxIdle"> <value>0</value> </property> 
+			<property name="maxActive"> <value>0</value> </property> <property name="maxWait"> 
+			<value>1000000</value> </property> -->
+	</bean>
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"> 
+            		<value>com.microsoft.sqlserver.jdbc.SQLServerDriver</value> 
+        	</property> 
+        	<property name="url"> 
+            		<value>jdbc:sqlserver://220.128.154.83\SQLEXPRESS:1433;databaseName=salary;user=sa;password=Bracci0800454545;</value>
+        	</property> 
+        	<property name="username"> 
+            		<value>sa</value> 
+        	</property> 
+        	<property name="password"> 
+            		<value>Bracci0800454545</value> 
+        	</property>
+	</bean>	
+	
+
+	<bean id="daoFactory" class="com.csjian.model.dao.DaoFactory">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean>
+
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="home.do">homeController</prop>
+				<prop key="account.do">accountController</prop>
+				<prop key="employee.do">employeeController</prop>
+				<prop key="salary.do">salaryController</prop>
+				<prop key="form.do">formController</prop>
+				<prop key="report.do">reportController</prop>
+				<prop key="file.do">fileController</prop>
+				<prop key="reportFile.do">reportFileController</prop>
+				<prop key="insuranceAddOn.do">insuranceAddOnController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.InternalResourceView</value>
+		</property>
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<bean id="paraMethodResolver"
+		class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+		<property name="paramName">
+			<value>action</value>
+		</property>
+		<property name="defaultMethodName">
+			<value>welcome</value>
+		</property>
+	</bean>
+
+	<bean id="sessionHelper" class="com.csjian.controller.SessionHelper" />
+
+	<bean id="homeController" class="com.csjian.controller.HomeController">
+		<property name="methodNameResolver">
+			<ref bean="paraMethodResolver" />
+		</property>
+		<property name="sessionHelper">
+			<ref bean="sessionHelper" />
+		</property>
+		<property name="resources">
+			<ref bean="resources" />
+		</property>
+		<property name="daoFactory">
+			<ref bean="daoFactory" />
+		</property>
+	</bean>
+	<bean id="accountController" class="com.csjian.controller.AccountController">
+		<property name="methodNameResolver">
+			<ref bean="paraMethodResolver" />
+		</property>
+		<property name="sessionHelper">
+			<ref bean="sessionHelper" />
+		</property>
+		<property name="resources">
+			<ref bean="resources" />
+		</property>
+		<property name="daoFactory">
+			<ref bean="daoFactory" />
+		</property>
+	</bean>
+	<bean id="employeeController" class="com.csjian.controller.EmployeeController">
+		<property name="methodNameResolver">
+			<ref bean="paraMethodResolver" />
+		</property>
+		<property name="sessionHelper">
+			<ref bean="sessionHelper" />
+		</property>
+		<property name="resources">
+			<ref bean="resources" />
+		</property>
+		<property name="daoFactory">
+			<ref bean="daoFactory" />
+		</property>
+	</bean>
+	<bean id="salaryController" class="com.csjian.controller.SalaryController">
+		<property name="methodNameResolver">
+			<ref bean="paraMethodResolver" />
+		</property>
+		<property name="sessionHelper">
+			<ref bean="sessionHelper" />
+		</property>
+		<property name="resources">
+			<ref bean="resources" />
+		</property>
+		<property name="daoFactory">
+			<ref bean="daoFactory" />
+		</property>
+	</bean>
+	<bean id="formController" class="com.csjian.controller.FormController">
+		<property name="methodNameResolver">
+			<ref bean="paraMethodResolver" />
+		</property>
+		<property name="sessionHelper">
+			<ref bean="sessionHelper" />
+		</property>
+		<property name="resources">
+			<ref bean="resources" />
+		</property>
+		<property name="daoFactory">
+			<ref bean="daoFactory" />
+		</property>
+	</bean>
+	<bean id="reportController" class="com.csjian.controller.ReportController">
+		<property name="methodNameResolver">
+			<ref bean="paraMethodResolver" />
+		</property>
+		<property name="sessionHelper">
+			<ref bean="sessionHelper" />
+		</property>
+		<property name="resources">
+			<ref bean="resources" />
+		</property>
+		<property name="daoFactory">
+			<ref bean="daoFactory" />
+		</property>
+	</bean>
+	<bean id="fileController" class="com.csjian.controller.FileController">
+		<property name="methodNameResolver">
+			<ref bean="paraMethodResolver" />
+		</property>
+		<property name="sessionHelper">
+			<ref bean="sessionHelper" />
+		</property>
+		<property name="resources">
+			<ref bean="resources" />
+		</property>
+		<property name="daoFactory">
+			<ref bean="daoFactory" />
+		</property>
+	</bean>
+	<bean id="reportFileController" class="com.csjian.controller.ReportFileController">
+		<property name="methodNameResolver">
+			<ref bean="paraMethodResolver" />
+		</property>
+		<property name="sessionHelper">
+			<ref bean="sessionHelper" />
+		</property>
+		<property name="resources">
+			<ref bean="resources" />
+		</property>
+		<property name="daoFactory">
+			<ref bean="daoFactory" />
+		</property>
+	</bean>
+	<bean id="insuranceAddOnController" class="com.csjian.controller.InsuranceAddOnController">
+		<property name="methodNameResolver">
+			<ref bean="paraMethodResolver" />
+		</property>
+		<property name="sessionHelper">
+			<ref bean="sessionHelper" />
+		</property>
+		<property name="resources">
+			<ref bean="resources" />
+		</property>
+		<property name="daoFactory">
+			<ref bean="daoFactory" />
+		</property>
+	</bean>
+</beans>
