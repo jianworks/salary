@@ -15,8 +15,14 @@
     Vector logs = (Vector)request.getAttribute("logs");
 %>
 
-  <SCRIPT LANGUAGE="JavaScript">
+  <script type=text/javascript>
   <!--
+  
+  	$( function() {
+  		$( "#startdate" ).datepickerTW();
+  		$( "#enddate" ).datepickerTW();
+	} );
+  
     function selPage(ipageno) {
 	  with (document.mainform) {
         pageno.value = ipageno;
@@ -24,12 +30,25 @@
 	  }
     }
 
+  	var fieldName;
     function sDate(eventType) {
-      with (document.mainform) {
-        var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 250px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-        eval(eventType + ".value=returnValue");
-      }
+    	fieldName = eventType
+     	with (document.mainform) {
+        	//var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 250px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
+        	window.open("misc/calendar.html", "_blank", "width=280px,height=250px");
+        	//eval(eventType + ".value=returnValue");
+      	}
     }
+    
+    function windowOpenReturnFunc(returnValue) {
+        //ret為子視窗回傳的值
+        with (document.mainform) {
+        	if (returnValue) {
+    			eval(fieldName + ".value=returnValue");
+        	}
+        }
+    }
+   
 
     function sAgent() {
 	  with (document.mainform) {
@@ -37,8 +56,8 @@
         submit();
 	  }
     }
-   //-->
-  </SCRIPT>
+    //-->
+  </script>
 
   <form method="POST" Name="mainform" Action="<%=response.encodeURL("account.do?action=statistics") %>" onSubmit='return validate();'>
   <table class=FormBorder width="100%"  border="0" cellpadding="0" cellspacing="0">
@@ -70,8 +89,8 @@
       <td colspan=2 height="20">
         <div align="left">
                          統計區間
-          <input name="startdate" value="<%=startdate%>" type="text" class="textfield" size="10" maxlength="10" readonly=true>&nbsp;<A href="javascript:sDate('startdate')"><IMG src="images/calendar.gif" border="0"></A>&nbsp;&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;&nbsp;
-          <input name="enddate" value="<%=enddate%>" type="text" class="textfield" size="10" maxlength="10" readonly=true>&nbsp;<A href="javascript:sDate('enddate')"><IMG src="images/calendar.gif" border="0"></A>
+          <input name="startdate" id="startdate" value="<%=startdate%>" type="text" class="textfield" size="10" maxlength="10" readonly=true>&nbsp;&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;&nbsp;
+          <input name="enddate" id="enddate" value="<%=enddate%>" type="text" class="textfield" size="10" maxlength="10" readonly=true>
           <input name="Submit3" type="submit" value="查詢">
         </div>
       </td>

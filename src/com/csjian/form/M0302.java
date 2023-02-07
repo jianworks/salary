@@ -81,6 +81,7 @@ public class M0302 extends PdfPageEventHelper {
 				if (form != null)
 					writer.copyAcroForm(reader);
 				f++;
+				reader.close();
 			}
 
 			// step 5: we close the document

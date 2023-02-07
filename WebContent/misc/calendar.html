@@ -15,6 +15,7 @@
 	var dCurDayOfMonth = dDate.getDate();
 	var dCurYear = dDate.getFullYear();
 	var objPrevElement = new Object();
+	var date;
 
 	function fToggleColor(myElement) {
 		var toggleColor = "#ff0000";
@@ -44,13 +45,15 @@
 				objPrevElement.bgColor = "";
 				with (document.all) {
 					calSelectedDate.value = parseInt(myElement.children["calDateText"].innerText);
-					returnValue = (parseInt(tbSelYear.value) - 1911) + '-'
-							+ tbSelMonth.value + '-' + calSelectedDate.value;
+					//returnValue = (parseInt(tbSelYear.value) - 1911) + '-' + tbSelMonth.value + '-' + calSelectedDate.value;
+					date = (parseInt(tbSelYear.value) - 1911) + '-' + tbSelMonth.value + '-' + calSelectedDate.value;
+					window.opener.windowOpenReturnFunc(date);
+					window.close();
 				}
 				objPrevElement = myElement;
 			}
 		}
-		window.close();
+		//window.close();
 	}
 
 	function fGetDaysInMonth(iMonth, iYear) {
@@ -201,16 +204,6 @@
 				<td>民國&nbsp; <select name="tbSelYear"
 					onchange='fUpdateCal(frmCalendarSample.tbSelYear.value, frmCalendarSample.tbSelMonth.value)'
 					style="width: 60">
-						<option value="1940">29</option>
-						<option value="1941">30</option>
-						<option value="1942">31</option>
-						<option value="1943">32</option>
-						<option value="1944">33</option>
-						<option value="1945">34</option>
-						<option value="1946">35</option>
-						<option value="1947">36</option>
-						<option value="1948">37</option>
-						<option value="1949">38</option>
 
 						<option value="1950">39</option>
 						<option value="1951">40</option>
@@ -288,6 +281,17 @@
 						<option value="2017">106</option>
 						<option value="2018">107</option>
 						<option value="2019">108</option>
+						
+						<option value="2020">109</option>
+						<option value="2021">110</option>
+						<option value="2022">111</option>
+						<option value="2023">112</option>
+						<option value="2024">113</option>
+						<option value="2025">114</option>
+						<option value="2026">115</option>
+						<option value="2027">116</option>
+						<option value="2028">117</option>
+						<option value="2029">118</option>
 				</select>&nbsp;年&nbsp;&nbsp; <select name="tbSelMonth"
 					onchange='fUpdateCal(frmCalendarSample.tbSelYear.value, frmCalendarSample.tbSelMonth.value)'
 					style="width: 60">

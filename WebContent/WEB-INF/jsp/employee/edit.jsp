@@ -13,14 +13,20 @@
     String today = (cal.get(Calendar.YEAR)-1911) + "-" + (cal.get(Calendar.MONTH)+1) + "-" + cal.get(Calendar.DATE);
 %>
 <script src="js/nextField.js" type=text/javascript></script>
-  <script type=text/javascript>
-  <!--
+<script type=text/javascript>
+<!--
     
-  var sequence = ["employeeno", "title", "name", "isnativeY", "isnativeN", "unicode", "birthday", "address", 
+	var sequence = ["employeeno", "title", "name", "isnativeY", "isnativeN", "unicode", "birthday", "address", 
                   "accountno", "onboarddate", "laborInsurance", "healthInsurance", "laborRetireFee", "retirefee", 
                   "isresignY", "isresignN", "resigndate", "btnUpdate"];
   
-  function doUpdate() {
+	$( function() {
+    	$( "#resigndate" ).datepickerTW();
+    	$( "#onboarddate" ).datepickerTW();
+    	$( "#birthday" ).datepickerTW();
+  	} );
+  
+  	function doUpdate() {
     	with (document.mainform) {
     		if (!chkBlank()) {
         	} else if (! chkMaxwords()) {
@@ -45,129 +51,139 @@
       
     var rePW = /^[0-9A-Za-z]+$/;
     function chkBlank() {
-      with (document.mainform) {
-        if (employeeno.value == "") {
-          window.alert("員工編號不得為空白!");
-          return false;
-        } else if (!rePW.test(employeeno.value)) {
-          window.alert("員工編號必須是英文或數字所組成！");
-          employeeno.focus();
-          return false;
-        } else if (name.value == "") {
-          window.alert("員工姓名不得為空白!");
-          return false;
-        } else if (unicode.value == "") {
-          window.alert("請輸入身份證號碼/統一證號!");
-          return false;
-        } else if (address.value == "") {
-          window.alert("住址不得為空白!");
-          return false;
-        } else if (onboarddate.value == "") {
-          window.alert("到職日不得為空白!");
-          return false;
-        } else if (isresign[0].checked&&resigndate.value=="") {
-          window.alert("請輸入離職日期!");
-          return false;
-        } else {
-          return true;
-        }
-      }
+      	with (document.mainform) {
+        	if (employeeno.value == "") {
+          		window.alert("員工編號不得為空白!");
+          		return false;
+        	} else if (!rePW.test(employeeno.value)) {
+          		window.alert("員工編號必須是英文或數字所組成！");
+          		employeeno.focus();
+          		return false;
+        	} else if (name.value == "") {
+          		window.alert("員工姓名不得為空白!");
+          		return false;
+        	} else if (unicode.value == "") {
+          		window.alert("請輸入身份證號碼/統一證號!");
+          		return false;
+        	} else if (address.value == "") {
+          		window.alert("住址不得為空白!");
+          		return false;
+        	} else if (onboarddate.value == "") {
+          		window.alert("到職日不得為空白!");
+          		return false;
+        	} else if (isresign[0].checked&&resigndate.value=="") {
+          		window.alert("請輸入離職日期!");
+          		return false;
+        	} else {
+          		return true;
+        	}
+      	}
     }
 
     function chkMaxwords() {
-      if (count(document.forms["mainform"].employeeno.value) > 10) {
-        window.alert("員工編號的字數超過上限(最大字元數10)!");
-        return false;
-      } else if (count(document.forms["mainform"].name.value) > 25) {
-        window.alert("員工姓名的字數超過上限(最大字元數25)!");
-        return false;
-      } else if (count(document.forms["mainform"].address.value) > 100) {
-        window.alert("住址的字數超過上限(最大字元數100)!");
-        return false;
-      } else {
-        return true;
-      }
+      	if (count(document.forms["mainform"].employeeno.value) > 10) {
+        	window.alert("員工編號的字數超過上限(最大字元數10)!");
+        	return false;
+      	} else if (count(document.forms["mainform"].name.value) > 25) {
+        	window.alert("員工姓名的字數超過上限(最大字元數25)!");
+        	return false;
+      	} else if (count(document.forms["mainform"].address.value) > 100) {
+        	window.alert("住址的字數超過上限(最大字元數100)!");
+        	return false;
+      	} else {
+        	return true;
+      	}
     }
 
     function count(value){
-      nowChr = 0;
-      //for迴圈判斷value中的每一個字是否在0~255間
-      for (var i=0;i<value.length;i++){
-        value.charCodeAt(i)<256?nowChr++:nowChr+=2;
-      }
-      return nowChr;
+      	nowChr = 0;
+      	//for迴圈判斷value中的每一個字是否在0~255間
+      	for (var i=0;i<value.length;i++){
+        	value.charCodeAt(i)<256?nowChr++:nowChr+=2;
+      	}
+      	return nowChr;
     }
 
+    var fieldName;
     function sDate(eventType) {
-      with (document.mainform) {
-        var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 280px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-        if (returnValue) {
-          eval(eventType + ".value=returnValue");
+    	fieldName = eventType
+      	with (document.mainform) {
+        	//var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 280px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
+        	window.open("misc/calendar.html?v=20200804", "_blank", "width=280px,height=250px");
+      	}
+    }
+    
+    function windowOpenReturnFunc(returnValue) {
+        //ret為子視窗回傳的值
+        with (document.mainform) {
+        	if (returnValue) {
+    			eval(fieldName + ".value=returnValue");
+        	}
         }
-      }
     }
 
     function showResign(isshow) {
-      with (document.mainform) {
-        if (isshow=='Y') {
-          resign3.style.display='block';
-        } else {
-          resign3.style.display='none';
-          resigndate.value = "";
-        }
-      }
+      	with (document.mainform) {
+        	if (isshow=='Y') {
+          		resign3.style.display='block';
+        	} else {
+          		resign3.style.display='none';
+          		resigndate.value = "";
+        	}
+      	}
     }
 
     function chkDate(datename) {
-      if (datename == "onboarddate") {
-        if (!validateDate(document.forms["mainform"].onboarddate.value)){
-          window.alert("到職日的日期格式錯誤");
-          document.forms["mainform"].onboarddate.value = "";
-        }
-      } else if (datename== "birthday") {
-    	  if (!validateDate(document.forms["mainform"].birthday.value)){
-              window.alert("出生日期的日期格式錯誤");
-              document.forms["mainform"].birthday.value = "";
+      	if (datename == "onboarddate") {
+        	if (!validateDate(document.forms["mainform"].onboarddate.value)){
+          		window.alert("到職日的日期格式錯誤");
+          		document.forms["mainform"].onboarddate.value = "";
+        	}
+      	} else if (datename== "birthday") {
+    	  	if (!validateDate(document.forms["mainform"].birthday.value)){
+             	 window.alert("出生日期的日期格式錯誤");
+              	document.forms["mainform"].birthday.value = "";
             }
-      } else {
-        if (!validateDate(document.forms["mainform"].resigndate.value)){
-          window.alert("離職日的日期格式錯誤");
-          document.forms["mainform"].resigndate.value = "";
-        }
-      }
+      	} else {
+        	if (!validateDate(document.forms["mainform"].resigndate.value)){
+          		window.alert("離職日的日期格式錯誤");
+          		document.forms["mainform"].resigndate.value = "";
+        	}
+      	}
     }
 
     function validateDate(datestr) {
-	  var datearray = datestr.split("-");
-	  if (datearray.length<3) return false;
-	  var year = datearray[0];
-	  var month = datearray[1];
-	  var day = datearray[2];
-	  var tempDate = new Date((parseInt(year)+1911) + "/" + month + "/" + day);
-	  if (isNaN(tempDate))
-	    return (false);
-	  if ((tempDate.getMonth()==parseInt(month)-1) && (tempDate.getDate()==parseInt(day))) {
-	    return (true);
-	  } else
-	    return (false);
+	  	var datearray = datestr.split("-");
+	  	if (datearray.length<3) return false;
+	  	var year = datearray[0];
+	  	var month = datearray[1];
+	  	var day = datearray[2];
+	  	var tempDate = new Date((parseInt(year)+1911) + "/" + month + "/" + day);
+	  	if (isNaN(tempDate))
+	    	return (false);
+	  	if ((tempDate.getMonth()==parseInt(month)-1) && (tempDate.getDate()==parseInt(day))) {
+	    	return (true);
+	  	} else {
+	    	return (false);
+	  	}
     }
 
     function validateNumber(oField) {
-      var oNumber = document.getElementById(oField).value;
-      var validateNumber = /^[0-9]*$/.test(oNumber);
-      if(!validateNumber) {
-        window.alert("金額部份只能輸入數字 !");
-        document.getElementById(oField).value = "";
-        return false;
-      } else {
-        return true;
-      }
+      	var oNumber = document.getElementById(oField).value;
+      	var validateNumber = /^[0-9]*$/.test(oNumber);
+      	if(!validateNumber) {
+        	window.alert("金額部份只能輸入數字 !");
+        	document.getElementById(oField).value = "";
+        	return false;
+      	} else {
+        	return true;
+      	}
     }
 
     function formatUnicode(){
-      with (document.mainform) {
-        unicode.value = unicode.value.toUpperCase();
-      }
+     	with (document.mainform) {
+        	unicode.value = unicode.value.toUpperCase();
+      	}
     }
 
     var ALP_STR = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
@@ -176,103 +192,103 @@
     var MAX_COUNT = 999;
     //身份證字號檢查器 - 累加檢查碼
     function getPID_SUM(sPID) {
-	  var iChkNum = 0;
-	  // 第 1 碼
-	  iChkNum = ALP_STR.indexOf(sPID.substr(0,1)) + 10;
-	  iChkNum = Math.floor(iChkNum/10) + (iChkNum%10*9);
-	  // 第 2 - 9 碼
-	  for(var i=1; i<sPID.length-1; i++) {
-		iChkNum += sPID.substr(i,1) * (9-i);
-	  }
+	  	var iChkNum = 0;
+	  	// 第 1 碼
+	  	iChkNum = ALP_STR.indexOf(sPID.substr(0,1)) + 10;
+	  	iChkNum = Math.floor(iChkNum/10) + (iChkNum%10*9);
+	  	// 第 2 - 9 碼
+	  	for(var i=1; i<sPID.length-1; i++) {
+			iChkNum += sPID.substr(i,1) * (9-i);
+	  	}
 
-	  // 第 10 碼
-	  iChkNum += sPID.substr(9,1)*1;
-	  return iChkNum;
+	  	// 第 10 碼
+	  	iChkNum += sPID.substr(9,1)*1;
+	  	return iChkNum;
     }
 
     // 身分證字號檢查器 - 檢查合法字元
     function chkPID_CHAR(sPID) {
-	  var sMsg = "";
-	  //sPID = trim(sPID.toUpperCase());
-	  var iPIDLen = String(sPID).length;
+	  	var sMsg = "";
+	  	//sPID = trim(sPID.toUpperCase());
+	  	var iPIDLen = String(sPID).length;
 
-	  var sChk = ALP_STR + NUM_STR;
-	  for(i=0;i<iPIDLen;i++) {
-		if (sChk.indexOf(sPID.substr(i,1)) < 0) {
-		  sMsg = "這個身分證字號含有不正確的字元！";
-		  break;
-		}
-	  }
-
-	  if (sMsg.length == 0) {
-		if (ALP_STR.indexOf(sPID.substr(0,1)) < 0) {
-		  sMsg = "身分證字號第 1 碼應為英文字母(A~Z)。";
-		} else if ((sPID.substr(1,1) != "1") && (sPID.substr(1,1) != "2")) {
-		  sMsg = "身分證字號第 2 碼應為數字(1~2)。";
-		} else {
-		  for(var i=2; i<iPIDLen; i++) {
-			if (NUM_STR.indexOf(sPID.substr(i, 1)) < 0) {
-			  sMsg = "第 " + (i+1) + " 碼應為數字(0~9)。";
-			  break;
+	  	var sChk = ALP_STR + NUM_STR;
+	  	for(i=0;i<iPIDLen;i++) {
+			if (sChk.indexOf(sPID.substr(i,1)) < 0) {
+		 		sMsg = "這個身分證字號含有不正確的字元！";
+		  		break;
 			}
-		  }
-		}
-	  }
-	  if (sMsg.length != 0) {
-		alert(sMsg);
-		return false;
-	  } else {
-		return true;
-	  }
+	  	}
+
+	  	if (sMsg.length == 0) {
+			if (ALP_STR.indexOf(sPID.substr(0,1)) < 0) {
+		  		sMsg = "身分證字號第 1 碼應為英文字母(A~Z)。";
+			} else if ((sPID.substr(1,1) != "1") && (sPID.substr(1,1) != "2")) {
+		  		sMsg = "身分證字號第 2 碼應為數字(1~2)。";
+			} else {
+		  		for(var i=2; i<iPIDLen; i++) {
+					if (NUM_STR.indexOf(sPID.substr(i, 1)) < 0) {
+			  			sMsg = "第 " + (i+1) + " 碼應為數字(0~9)。";
+			  			break;
+					}
+		  		}
+			}
+	  	}
+	  	if (sMsg.length != 0) {
+			alert(sMsg);
+			return false;
+	  	} else {
+			return true;
+	  	}
     }
 
     // 身分證字號檢查器
     function CheckPID(sPID) {
-	  if (sPID == '') {
-		window.alert("請輸入身分證字號/統一證號");
-		return false;
-	  } else if (sPID.length != 10) {
-		window.alert("身分證字號長度應為 10 ！");
-		return false;
-	  } else {
-		sPID = trim(sPID.toUpperCase());
-		if (!chkPID_CHAR(sPID)) return false;
-		var iChkNum = getPID_SUM(sPID);
-		if (iChkNum % 10 != 0) {
-		  window.alert("身分證字號不正確 ! ");
-		  return false;
-		}
-	  }
-	  return true;
+	 	if (sPID == '') {
+			window.alert("請輸入身分證字號/統一證號");
+			return false;
+	  	} else if (sPID.length != 10) {
+			window.alert("身分證字號長度應為 10 ！");
+			return false;
+	  	} else {
+			sPID = trim(sPID.toUpperCase());
+			if (!chkPID_CHAR(sPID)) return false;
+				var iChkNum = getPID_SUM(sPID);
+			if (iChkNum % 10 != 0) {
+		  		window.alert("身分證字號不正確 ! ");
+		  		return false;
+			}
+	  	}
+	  	return true;
     }
 
     function trim(str) {
-	  while (str.indexOf(" ")==0) {
-		str = str.substring(1, str.length);
-	  }
-	  while ((str.length>0) && (str.indexOf(" ")==(str.length-1))) {
-		str = str.substring(0, str.length-1);
-	  }
-	  return str;
+	  	while (str.indexOf(" ")==0) {
+			str = str.substring(1, str.length);
+	  	}
+	  	while ((str.length>0) && (str.indexOf(" ")==(str.length-1))) {
+			str = str.substring(0, str.length-1);
+	  	}
+	  	return str;
     }
     
     function sRetire() {
-      with (document.mainform) {
-        window.open("misc/retireSalaryGrade.jsp", "", "height=320,resizable=yes,scrollbars=yes");
-      }
+      	with (document.mainform) {
+        	window.open("misc/retireSalaryGrade.jsp", "", "height=320,resizable=yes,scrollbars=yes");
+      	}
     }
     
     function sHealth() {
         with (document.mainform) {
         	window.open("misc/healthFee.jsp?amount=0", "", "height=320,width=480,scrollbars=yes");
         }
-      }
+    }
 
-      function sLabor() {
+	function sLabor() {
         with (document.mainform) {
         	window.open("misc/laborFee.jsp?amount=0", "", "height=320,resizable=yes,scrollbars=yes");
         }
-      }
+	}
   //-->
   </script>
 
@@ -323,7 +339,6 @@
             <td class=dataLabel><div align="right">出生年月日：</div></td>
             <td colspan="2" align="left">
               <input name="birthday" id="birthday" value="<%=!employee.getBirthday().equals("")?StringUtils.adToTw(employee.getBirthday()):""%>" type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("birthday");'> (格式 YY-MM-DD 例如 96-5-24)
-              &nbsp;<A href="javascript:sDate('birthday')"><IMG src="images/calendar.gif" border="0"></A>
             </td>
           </tr>
           <tr>
@@ -338,7 +353,6 @@
             <td class=dataLabel><div align="right">到職日：</div></td>
             <td colspan="2" align="left">
               <input name="onboarddate" id="onboarddate" value="<%=!employee.getOnboarddate().equals("")?StringUtils.adToTw(employee.getOnboarddate()):today%>" type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("onboarddate");'> (格式 YY-MM-DD 例如 96-5-24)
-              &nbsp;<A href="javascript:sDate('onboarddate')"><IMG src="images/calendar.gif" border="0"></A>
             </td>
           </tr>
           <tr>
@@ -379,7 +393,6 @@
                 <td class=dataLabel width="20%"><div align="right">離職日期：</div></td>
                 <td colspan="2" align="left">
                   <input name="resigndate" id="resigndate" value="<%=StringUtils.adToTw(employee.getResigndate())%>" type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("resigndate");'> (格式 YY-MM-DD 例如 96-5-24)
-                  &nbsp;<A href="javascript:sDate('resigndate')"><IMG src="images/calendar.gif" border="0"></A>
                 </td>
               </tr>
             </table></span>

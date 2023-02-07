@@ -14,6 +14,11 @@
 
   <SCRIPT LANGUAGE="JavaScript"><!--
   
+  	$( function() {
+  		$( "#birth1" ).datepickerTW();
+  		$( "#birth2" ).datepickerTW();
+	} );
+  
     function selEmp() {
       with (document.mainform) {
         dependant.style.display='none';
@@ -53,15 +58,6 @@
 	    return (true);
 	  else
 	    return (false);
-    }
-
-    function sDate(eventType) {
-      with (document.mainform) {
-        var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 250px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-        if (returnValue) {
-          eval(eventType + ".value=returnValue");
-        }
-      }
     }
 
 	var ALP_STR = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
@@ -494,7 +490,6 @@
             <tr>
               <td width="15%"><div align="right">員工出生日期：</div></td>
               <td align="left" colspan="3"><input name="birth1" id="birth1" value='<%=employees!=null&&employees.length>0?StringUtils.adToTw(employees[0].getBirthday()):""%>' type="text" class="textfield" size="10" maxlength="9" onChange='chkDate("birth1");'>(格式 YY-MM-DD 例如 95-5-24)
-           		&nbsp;<A href="javascript:sDate('birth1')"><IMG src="images/calendar.gif" border="0"></A>
           	  </td>
             </tr>
             <tr bgcolor="#FE9934"><td colspan=4>
@@ -523,7 +518,6 @@
                   <td width="15%"><div align="right">眷屬出生日期：</div></td>
                   <td align="left">
                     <input name="birth2" id="birth2" type="text" class="textfield" size="10" maxlength="9" onChange='chkDate("birth2");'>(格式 YY-MM-DD 例如 95-5-24)
-              		&nbsp;<A href="javascript:sDate('birth2')"><IMG src="images/calendar.gif" border="0"></A>
               	  </td>
                 </tr>
               </table></span>

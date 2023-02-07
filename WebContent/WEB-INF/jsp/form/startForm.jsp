@@ -8,6 +8,11 @@
 
   <SCRIPT LANGUAGE="JavaScript">
   <!--
+  
+  	$( function() {
+  		$( "#birth" ).datepickerTW();
+	} );
+  
 	function retrieveForm() {
       with (document.mainform) {
         location.href = "servlet/RetrieveBlankForm?form=startform";
@@ -35,14 +40,6 @@
     	
     }
     
-    function sDate(eventType) {
-        with (document.mainform) {
-          var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 280px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-          if (returnValue) {
-            eval(eventType + ".value=returnValue");
-          }
-        }
-      }
   //-->
   </SCRIPT>
 
@@ -120,7 +117,6 @@
           <tr>
               <td class=dataLabel width="20%"><div align="right">負責人出生日期：</div></td>
               <td align="left"><input name="birth" id="birth" value='' type="text" class="textfield" size="10" maxlength="9" onChange='chkDate("birth");'>(格式 YY-MM-DD 例如 95-5-24)
-           		&nbsp;<A href="javascript:sDate('birth')"><IMG src="images/calendar.gif" border="0"></A>
           	  </td>
           </tr>
           <tr>

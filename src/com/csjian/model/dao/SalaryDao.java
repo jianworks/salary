@@ -22,8 +22,8 @@ public class SalaryDao extends TemplateDao {
 
 			conn = this.dataSource.getConnection();
 			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM Employees WHERE regcode='" + regcode + "' AND employeeno='" + employeeno
-					+ "' AND ayear='" + year + "'");
+			rs = stmt.executeQuery("SELECT * FROM Employees WHERE regcode='" + regcode + "' AND employeeno='"
+					+ employeeno + "' AND ayear='" + year + "'");
 			if (rs.next()) {
 				salary.setGovinsurance(rs.getString("govinsurance") != null ? rs.getString("govinsurance") : "");
 				salary.setName(rs.getString("name") != null ? rs.getString("name") : "");
@@ -43,9 +43,9 @@ public class SalaryDao extends TemplateDao {
 				salary.setTotal(rs.getString("total") != null ? rs.getString("total") : "");
 				salary.setTax(rs.getString("tax") != null ? rs.getString("tax") : "");
 
-				PreparedStatement pstmt = conn.prepareStatement("SELECT amount FROM SalaryItems WHERE regcode='" + regcode + "'"
-						+ " AND employeeno='" + employeeno + "' AND ayear='" + year + "' AND amonth='" + month
-						+ "' AND itemmark=? AND seqno=?");
+				PreparedStatement pstmt = conn.prepareStatement("SELECT amount FROM SalaryItems WHERE regcode='"
+						+ regcode + "'" + " AND employeeno='" + employeeno + "' AND ayear='" + year + "' AND amonth='"
+						+ month + "' AND itemmark=? AND seqno=?");
 				pstmt.setString(1, "P");
 
 				rs0 = stmt.executeQuery("SELECT a.seqno, b.name FROM Enableps AS a, PItems AS b "
@@ -76,8 +76,8 @@ public class SalaryDao extends TemplateDao {
 				int ptotal = 0;
 				int mtotal = 0;
 
-				rs = stmt.executeQuery("SELECT * FROM BSalarys WHERE regcode='" + regcode + "' AND employeeno='" + employeeno
-						+ "' AND ayear='" + year + "'");
+				rs = stmt.executeQuery("SELECT * FROM BSalarys WHERE regcode='" + regcode + "' AND employeeno='"
+						+ employeeno + "' AND ayear='" + year + "'");
 				if (rs.next()) {
 					salary.setBasesalary(rs.getString("basesalary") != null ? rs.getString("basesalary") : "");
 					salary.setBaserate(rs.getString("baserate") != null ? rs.getString("baserate") : "");
@@ -90,8 +90,9 @@ public class SalaryDao extends TemplateDao {
 
 				rs0 = stmt.executeQuery("SELECT a.seqno, b.name FROM Enableps AS a, PItems AS b "
 						+ "WHERE a.seqno=b.seqno AND a.regcode='" + regcode + "' ORDER BY a.seqno");
-				PreparedStatement pstmt = conn.prepareStatement("SELECT amount FROM BSalaryItems WHERE regcode='" + regcode
-						+ "'" + " AND employeeno='" + employeeno + "' AND ayear='" + year + "' AND itemmark=? AND seqno=?");
+				PreparedStatement pstmt = conn.prepareStatement(
+						"SELECT amount FROM BSalaryItems WHERE regcode='" + regcode + "'" + " AND employeeno='"
+								+ employeeno + "' AND ayear='" + year + "' AND itemmark=? AND seqno=?");
 				pstmt.setString(1, "P");
 
 				while (rs0.next()) {
@@ -143,11 +144,13 @@ public class SalaryDao extends TemplateDao {
 			PreparedStatement updStmt = null;
 
 			stmt.executeUpdate("DELETE FROM Salarys WHERE regcode='" + salary.getRegcode() + "' AND employeeno='"
-					+ salary.getEmployeeno() + "' AND ayear='" + salary.getYear() + "' AND amonth='" + salary.getMonth() + "'");
-			updStmt = conn.prepareStatement("INSERT INTO Salarys(regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, " + 
-					"overtime, oversalary, workinghr, btotal, ptotal, mtotal, total, tax, " + 
-					"healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, laborretirefee, retirefee) " + 
-					"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					+ salary.getEmployeeno() + "' AND ayear='" + salary.getYear() + "' AND amonth='" + salary.getMonth()
+					+ "'");
+			updStmt = conn.prepareStatement(
+					"INSERT INTO Salarys(regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, "
+							+ "overtime, oversalary, workinghr, btotal, ptotal, mtotal, total, tax, "
+							+ "healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, laborretirefee, retirefee) "
+							+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			updStmt.setString(1, salary.getRegcode());
 			updStmt.setString(2, salary.getEmployeeno());
 			updStmt.setString(3, salary.getYear());
@@ -240,9 +243,10 @@ public class SalaryDao extends TemplateDao {
 			updStmt.executeUpdate();
 
 			stmt.executeUpdate("DELETE FROM SalaryItems WHERE regcode='" + salary.getRegcode() + "' AND employeeno='"
-					+ salary.getEmployeeno() + "' AND ayear='" + salary.getYear() + "' AND amonth='" + salary.getMonth() + "'");
-			updStmt = conn
-					.prepareStatement("INSERT INTO SalaryItems(regcode, employeeno, ayear, amonth, seqno, itemmark, amount) VALUES(?, ?, ?, ?, ?, ?, ?)");
+					+ salary.getEmployeeno() + "' AND ayear='" + salary.getYear() + "' AND amonth='" + salary.getMonth()
+					+ "'");
+			updStmt = conn.prepareStatement(
+					"INSERT INTO SalaryItems(regcode, employeeno, ayear, amonth, seqno, itemmark, amount) VALUES(?, ?, ?, ?, ?, ?, ?)");
 			updStmt.setString(1, salary.getRegcode());
 			updStmt.setString(2, salary.getEmployeeno());
 			updStmt.setString(3, salary.getYear());
@@ -280,16 +284,17 @@ public class SalaryDao extends TemplateDao {
 	public List findActiveEmployeeSalary(String regcode, String year, String month) {
 		Connection conn = null;
 		List salarys = new ArrayList();
-		String mstart = year + "/" + (month.length()>1?month:"0"+month) + "/01";
-		String mend = year + "/" + (month.length()>1?month:"0"+month) + "/31";
+		String mstart = year + "/" + (month.length() > 1 ? month : "0" + month) + "/01";
+		String mend = year + "/" + (month.length() > 1 ? month : "0" + month) + "/31";
 		ResultSet rs = null, rs0 = null;
 		try {
 			conn = this.dataSource.getConnection();
 			Statement stmt = conn.createStatement();
 
-			rs = stmt.executeQuery("SELECT employeeno, name FROM Employees WHERE CONVERT(varchar(12) , onboarddate, 111 )<='"
-					+ mend + "' " + " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='" + mstart + "') "
-					+ " AND regcode='" + regcode + "' AND ayear='" + year + "' ORDER BY employeeno");
+			rs = stmt.executeQuery(
+					"SELECT employeeno, name FROM Employees WHERE CONVERT(varchar(12) , onboarddate, 111 )<='" + mend
+							+ "' " + " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='" + mstart
+							+ "') " + " AND regcode='" + regcode + "' AND ayear='" + year + "' ORDER BY employeeno");
 			PreparedStatement pstmt = conn.prepareStatement("SELECT total FROM Salarys WHERE regcode='" + regcode
 					+ "' AND ayear='" + year + "' AND amonth='" + month + "' AND employeeno=?");
 			while (rs.next()) {
@@ -321,14 +326,14 @@ public class SalaryDao extends TemplateDao {
 			Statement stmt = conn.createStatement();
 			/*
 			 * rs =stmt.executeQuery(
-			 * "SELECT employeeno, name FROM employee WHERE onboarddate<='" + mend +
-			 * "' " + " AND (resigndate is null OR resigndate>='" + mstart + "') " +
-			 * " AND regcode='" + regcode + "' AND ayear='" + ayear +
-			 * "' ORDER BY employeeno");
+			 * "SELECT employeeno, name FROM employee WHERE onboarddate<='" +
+			 * mend + "' " + " AND (resigndate is null OR resigndate>='" +
+			 * mstart + "') " + " AND regcode='" + regcode + "' AND ayear='" +
+			 * ayear + "' ORDER BY employeeno");
 			 */
 			rs = stmt.executeQuery("SELECT DISTINCT a.employeeno, a.name FROM Employees a, Salarys b WHERE "
-					+ " a.regcode=b.regcode and a.employeeno=b.employeeno " + " AND b.ayear='" + year + "' AND b.amonth='"
-					+ month + "' and a.regcode='" + regcode + "' ORDER BY a.employeeno");
+					+ " a.regcode=b.regcode and a.employeeno=b.employeeno " + " AND b.ayear='" + year
+					+ "' AND b.amonth='" + month + "' and a.regcode='" + regcode + "' ORDER BY a.employeeno");
 
 			PreparedStatement pstmt = conn.prepareStatement("SELECT total FROM Salarys WHERE regcode='" + regcode
 					+ "' AND ayear='" + year + "' AND amonth='" + month + "' AND employeeno=?");
@@ -354,16 +359,15 @@ public class SalaryDao extends TemplateDao {
 		Connection conn = null;
 		Collection salaries = new ArrayList();
 		Vector employees = new Vector();
-		String mstart = ayear + "/" + (amonth.length()>1?amonth:"0"+amonth) + "/1";
-		String mend = ayear + "/" + (amonth.length()>1?amonth:"0"+amonth) + "/31";
+		String mstart = ayear + "/" + (amonth.length() > 1 ? amonth : "0" + amonth) + "/1";
+		String mend = ayear + "/" + (amonth.length() > 1 ? amonth : "0" + amonth) + "/31";
 		try {
 			conn = this.dataSource.getConnection();
 			Statement stmt = conn.createStatement();
 
-			ResultSet rs = stmt
-					.executeQuery("SELECT employeeno, name FROM Employees WHERE regcode='" + regcode + "' AND ayear='" + ayear
-							+ "' AND employeeno in (SELECT employeeno FROM Salarys WHERE regcode='" + regcode + "' AND ayear='"
-							+ ayear + "' AND amonth='" + amonth + "') ORDER BY employeeno");
+			ResultSet rs = stmt.executeQuery("SELECT employeeno, name FROM Employees WHERE regcode='" + regcode
+					+ "' AND ayear='" + ayear + "' AND employeeno in (SELECT employeeno FROM Salarys WHERE regcode='"
+					+ regcode + "' AND ayear='" + ayear + "' AND amonth='" + amonth + "') ORDER BY employeeno");
 			while (rs.next()) {
 				String[] employee = { rs.getString(1), rs.getString(2) };
 				employees.add(employee);
@@ -397,14 +401,14 @@ public class SalaryDao extends TemplateDao {
 
 			conn = this.dataSource.getConnection();
 			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM Employees WHERE regcode='" + regcode + "' AND employeeno='" + employeeno
-					+ "' AND ayear='" + year + "'");
+			rs = stmt.executeQuery("SELECT * FROM Employees WHERE regcode='" + regcode + "' AND employeeno='"
+					+ employeeno + "' AND ayear='" + year + "'");
 			if (rs.next()) {
 				salary.setGovinsurance(rs.getString("govinsurance") != null ? rs.getString("govinsurance") : "");
 				salary.setName(rs.getString("name") != null ? rs.getString("name") : "");
 			}
-			rs = stmt
-					.executeQuery("SELECT sum(basesalary), sum(oversalary), sum(btotal), sum(ptotal), sum(mtotal), sum(total), sum(tax) FROM Salarys WHERE regcode='"
+			rs = stmt.executeQuery(
+					"SELECT sum(basesalary), sum(oversalary), sum(btotal), sum(ptotal), sum(mtotal), sum(total), sum(tax) FROM Salarys WHERE regcode='"
 							+ regcode + "' AND employeeno='" + employeeno + "' AND ayear= '" + year + "'");
 			if (rs.next()) { // 已有薪資資料
 				salary.setBasesalary(rs.getString(1) != null ? rs.getString(1) : "");
@@ -417,8 +421,9 @@ public class SalaryDao extends TemplateDao {
 
 				rs0 = stmt.executeQuery("SELECT a.seqno, b.name FROM Enableps AS a, PItems AS b "
 						+ "WHERE a.seqno=b.seqno AND a.regcode='" + regcode + "' ORDER BY a.seqno");
-				PreparedStatement pstmt = conn.prepareStatement("SELECT sum(amount) FROM SalaryItems WHERE regcode='" + regcode
-						+ "'" + " AND employeeno='" + employeeno + "' AND ayear = '" + year + "' AND itemmark=? AND seqno=?");
+				PreparedStatement pstmt = conn.prepareStatement(
+						"SELECT sum(amount) FROM SalaryItems WHERE regcode='" + regcode + "'" + " AND employeeno='"
+								+ employeeno + "' AND ayear = '" + year + "' AND itemmark=? AND seqno=?");
 				pstmt.setString(1, "P");
 				while (rs0.next()) {
 					pstmt.setString(2, rs0.getString(1));
@@ -463,12 +468,16 @@ public class SalaryDao extends TemplateDao {
 		try {
 			conn = this.dataSource.getConnection();
 			Statement stmt = conn.createStatement();
-			/*ResultSet rs = stmt
-					.executeQuery("SELECT employeeno, name FROM employee WHERE CONVERT(varchar(12) , onboarddate, 111 )<='"
-							+ mend + "' " + " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='" + mstart + "') "
-							+ " AND regcode='" + regcode + "' AND ayear='" + year + "' ORDER BY employeeno"); */
-			ResultSet rs = stmt
-			.executeQuery("SELECT employeeno, name FROM Employees WHERE regcode='" + regcode + "' AND ayear='" + year + "' ORDER BY employeeno");
+			/*
+			 * ResultSet rs = stmt
+			 * .executeQuery("SELECT employeeno, name FROM employee WHERE CONVERT(varchar(12) , onboarddate, 111 )<='"
+			 * + mend + "' " +
+			 * " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='"
+			 * + mstart + "') " + " AND regcode='" + regcode + "' AND ayear='" +
+			 * year + "' ORDER BY employeeno");
+			 */
+			ResultSet rs = stmt.executeQuery("SELECT employeeno, name FROM Employees WHERE regcode='" + regcode
+					+ "' AND ayear='" + year + "' ORDER BY employeeno");
 			while (rs.next()) {
 				String[] employee = { rs.getString(1), rs.getString(2) };
 				employees.add(employee);
@@ -512,8 +521,8 @@ public class SalaryDao extends TemplateDao {
 		try {
 			conn = this.dataSource.getConnection();
 			Statement stmt = conn.createStatement();
-			String mstart = ayear + "/" + (amonth.length()>1?amonth:"0"+amonth)+ "/01";
-			String mend = ayear + "/" + (amonth.length()>1?amonth:"0"+amonth) + "/31";
+			String mstart = ayear + "/" + (amonth.length() > 1 ? amonth : "0" + amonth) + "/01";
+			String mend = ayear + "/" + (amonth.length() > 1 ? amonth : "0" + amonth) + "/31";
 
 			String lyear = "";
 			String lmonth = "";
@@ -525,27 +534,27 @@ public class SalaryDao extends TemplateDao {
 				lyear = ayear;
 			}
 
-			stmt.executeUpdate("DELETE FROM Salarys WHERE regcode='" + regcode + "' AND ayear='" + ayear + "' AND amonth='"
-					+ amonth + "'");
+			stmt.executeUpdate("DELETE FROM Salarys WHERE regcode='" + regcode + "' AND ayear='" + ayear
+					+ "' AND amonth='" + amonth + "'");
 			stmt.executeUpdate("DELETE FROM SalaryItems WHERE regcode='" + regcode + "' AND ayear='" + ayear
 					+ "' AND amonth='" + amonth + "'");
-			PreparedStatement updStmt = conn
-					.prepareStatement("INSERT INTO Salarys(regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, overtime, oversalary, " + 
-									"workinghr, btotal, ptotal, mtotal, total, tax, healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, " + 
-									"laborretirefee, retirefee) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			PreparedStatement updItem = conn
-					.prepareStatement("INSERT INTO SalaryItems(regcode, employeeno, ayear, amonth, seqno, itemmark, amount) VALUES(?, ?, ?, ?, ?, ?, ?)");
-			PreparedStatement selStmt = conn
-					.prepareStatement("SELECT regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, overtime, oversalary, workinghr, btotal, ptotal, mtotal, total, tax, healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, laborretirefee, retirefee FROM Salarys WHERE regcode='"
+			PreparedStatement updStmt = conn.prepareStatement(
+					"INSERT INTO Salarys(regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, overtime, oversalary, "
+							+ "workinghr, btotal, ptotal, mtotal, total, tax, healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, "
+							+ "laborretirefee, retirefee) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement updItem = conn.prepareStatement(
+					"INSERT INTO SalaryItems(regcode, employeeno, ayear, amonth, seqno, itemmark, amount) VALUES(?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement selStmt = conn.prepareStatement(
+					"SELECT regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, overtime, oversalary, workinghr, btotal, ptotal, mtotal, total, tax, healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, laborretirefee, retirefee FROM Salarys WHERE regcode='"
 							+ regcode + "' AND ayear='" + lyear + "' AND amonth='" + lmonth + "' AND employeeno=?");
-			PreparedStatement selItem = conn
-					.prepareStatement("SELECT regcode, employeeno, ayear, amonth, seqno, itemmark, amount FROM SalaryItems WHERE regcode='"
+			PreparedStatement selItem = conn.prepareStatement(
+					"SELECT regcode, employeeno, ayear, amonth, seqno, itemmark, amount FROM SalaryItems WHERE regcode='"
 							+ regcode + "' AND ayear='" + lyear + "' AND amonth='" + lmonth + "' AND employeeno=?");
 
-			ResultSet rs = stmt
-					.executeQuery("SELECT employeeno, name FROM Employees WHERE CONVERT(varchar(12) , onboarddate, 111 )<='"
-							+ mend + "' " + " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='" + mstart + "') "
-							+ " AND regcode='" + regcode + "' AND ayear='" + ayear + "' ORDER BY employeeno");
+			ResultSet rs = stmt.executeQuery(
+					"SELECT employeeno, name FROM Employees WHERE CONVERT(varchar(12) , onboarddate, 111 )<='" + mend
+							+ "' " + " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='" + mstart
+							+ "') " + " AND regcode='" + regcode + "' AND ayear='" + ayear + "' ORDER BY employeeno");
 			ResultSet rs1 = null;
 			while (rs.next()) {
 				selStmt.setString(1, rs.getString(1));
@@ -582,33 +591,36 @@ public class SalaryDao extends TemplateDao {
 		}
 	}
 
-	public void copy(String regcode, String fromYear, String fromMonth, String toYear, String toMonth) throws Exception {
+	public void copy(String regcode, String fromYear, String fromMonth, String toYear, String toMonth)
+			throws Exception {
 		Connection conn = null;
 		try {
 			conn = this.dataSource.getConnection();
 			Statement stmt = conn.createStatement();
-			String mstart = toYear + "/" + (toMonth.length()>1?toMonth:"0"+toMonth) + "/01";
-			String mend = toYear + "/" + (toMonth.length()>1?toMonth:"0"+toMonth) + "/31";
+			String mstart = toYear + "/" + (toMonth.length() > 1 ? toMonth : "0" + toMonth) + "/01";
+			String mend = toYear + "/" + (toMonth.length() > 1 ? toMonth : "0" + toMonth) + "/31";
 
-			stmt.executeUpdate("DELETE FROM Salarys WHERE regcode='" + regcode + "' AND ayear='" + toYear + "' AND amonth='"
-					+ toMonth + "'");
+			stmt.executeUpdate("DELETE FROM Salarys WHERE regcode='" + regcode + "' AND ayear='" + toYear
+					+ "' AND amonth='" + toMonth + "'");
 			stmt.executeUpdate("DELETE FROM SalaryItems WHERE regcode='" + regcode + "' AND ayear='" + toYear
 					+ "' AND amonth='" + toMonth + "'");
-			PreparedStatement updStmt = conn
-					.prepareStatement("INSERT INTO Salarys(regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, overtime, oversalary, workinghr, btotal, ptotal, mtotal, total, tax, healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, laborretirefee, retirefee) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			PreparedStatement updItem = conn
-					.prepareStatement("INSERT INTO SalaryItems(regcode, employeeno, ayear, amonth, seqno, itemmark, amount) VALUES(?, ?, ?, ?, ?, ?, ?)");
-			PreparedStatement selStmt = conn
-					.prepareStatement("SELECT regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, overtime, oversalary, workinghr, btotal, ptotal, mtotal, total, tax, healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, laborretirefee, retirefee FROM Salarys WHERE regcode='"
-							+ regcode + "' AND ayear='" + fromYear + "' AND amonth='" + fromMonth + "' AND employeeno=?");
-			PreparedStatement selItem = conn
-					.prepareStatement("SELECT regcode, employeeno, ayear, amonth, seqno, itemmark, amount FROM SalaryItems WHERE regcode='"
-							+ regcode + "' AND ayear='" + fromYear + "' AND amonth='" + fromMonth + "' AND employeeno=?");
+			PreparedStatement updStmt = conn.prepareStatement(
+					"INSERT INTO Salarys(regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, overtime, oversalary, workinghr, btotal, ptotal, mtotal, total, tax, healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, laborretirefee, retirefee) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement updItem = conn.prepareStatement(
+					"INSERT INTO SalaryItems(regcode, employeeno, ayear, amonth, seqno, itemmark, amount) VALUES(?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement selStmt = conn.prepareStatement(
+					"SELECT regcode, employeeno, ayear, amonth, basesalary, baserate, overtimerate, overtime, oversalary, workinghr, btotal, ptotal, mtotal, total, tax, healthinsurance, laborinsurance, healthinsurancefee, laborinsurancefee, laborretirefee, retirefee FROM Salarys WHERE regcode='"
+							+ regcode + "' AND ayear='" + fromYear + "' AND amonth='" + fromMonth
+							+ "' AND employeeno=?");
+			PreparedStatement selItem = conn.prepareStatement(
+					"SELECT regcode, employeeno, ayear, amonth, seqno, itemmark, amount FROM SalaryItems WHERE regcode='"
+							+ regcode + "' AND ayear='" + fromYear + "' AND amonth='" + fromMonth
+							+ "' AND employeeno=?");
 
-			ResultSet rs = stmt
-					.executeQuery("SELECT employeeno, name FROM Employees WHERE CONVERT(varchar(12) , onboarddate, 111 )<='"
-							+ mend + "' " + " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='" + mstart + "') "
-							+ " AND regcode='" + regcode + "' AND ayear='" + toYear + "' ORDER BY employeeno");
+			ResultSet rs = stmt.executeQuery(
+					"SELECT employeeno, name FROM Employees WHERE CONVERT(varchar(12) , onboarddate, 111 )<='" + mend
+							+ "' " + " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='" + mstart
+							+ "') " + " AND regcode='" + regcode + "' AND ayear='" + toYear + "' ORDER BY employeeno");
 			ResultSet rs1 = null;
 			while (rs.next()) {
 				selStmt.setString(1, rs.getString(1));
@@ -655,7 +667,8 @@ public class SalaryDao extends TemplateDao {
 			ResultSet rs = stmt
 					.executeQuery("SELECT b.employeeno, b.name, b.accountno, a.total FROM Salarys AS a, Employees AS b "
 							+ " WHERE a.regcode=b.regcode AND a.employeeno=b.employeeno AND a.ayear=b.ayear AND a.regcode='"
-							+ regcode + "' AND a.ayear='" + year + "' AND a.amonth='" + month + "' ORDER BY b.employeeno");
+							+ regcode + "' AND a.ayear='" + year + "' AND a.amonth='" + month
+							+ "' ORDER BY b.employeeno");
 			while (rs.next()) {
 				String[] item = { rs.getString(2), rs.getString(3), rs.getString(4) };
 				salaryDigest.add(item);
@@ -671,18 +684,18 @@ public class SalaryDao extends TemplateDao {
 	public Vector getYearlyReport(String regcode, String year) throws Exception {
 		Vector datamart = new Vector();
 		ResultSet rs, rs0;
-		String mstart = year + "/01/1";
+		String mstart = year + "/01/01";
 		String mend = year + "/12/31";
 		Connection conn = null;
 		try {
 			conn = this.dataSource.getConnection();
 			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM Employees WHERE CONVERT(varchar(12) , onboarddate, 111 )<='" + mend + "' "
-					+ " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='" + mstart + "') "
+			rs = stmt.executeQuery("SELECT * FROM Employees WHERE CONVERT(varchar(12) , onboarddate, 111 )<='" + mend
+					+ "' " + " AND (resigndate is null OR CONVERT(varchar(12) , resigndate, 111 )>='" + mstart + "') "
 					+ " AND regcode='" + regcode + "' AND ayear='" + year + "' ORDER BY employeeno");
 			PreparedStatement pstmt = conn
-					.prepareStatement("SELECT total, tax FROM Salarys WHERE regcode=? AND employeeno=? AND ayear='" + year
-							+ "' AND amonth=? ");
+					.prepareStatement("SELECT total, tax FROM Salarys WHERE regcode=? AND employeeno=? AND ayear='"
+							+ year + "' AND amonth=? ");
 			pstmt.setString(1, regcode);
 			int[] total = new int[43];
 			for (int i = 0; i < total.length; i++)
@@ -696,8 +709,8 @@ public class SalaryDao extends TemplateDao {
 				int ytax = 0;
 				String[] data = new String[43];
 				data[0] = rs.getString("employeeno");
-				data[1] = rs.getString("isnative") != null && rs.getString("isnative").equals("N") ? rs.getString("passport")
-						: rs.getString("unicode");
+				//data[1] = rs.getString("isnative") != null && rs.getString("isnative").equals("N") ? rs.getString("passport") : rs.getString("unicode");
+				data[1] = rs.getString("unicode");
 				data[2] = rs.getString("name");
 				data[3] = rs.getString("address");
 
@@ -706,10 +719,10 @@ public class SalaryDao extends TemplateDao {
 					pstmt.setString(3, i + "");
 					rs0 = pstmt.executeQuery();
 					if (rs0.next()) {
-						mtotal = Integer.parseInt(rs0.getString("total") != null && !rs0.getString("total").equals("") ? rs0
-								.getString("total") : "0");
-						mtax = Integer.parseInt(rs0.getString("tax") != null && !rs0.getString("tax").equals("") ? rs0
-								.getString("tax") : "0");
+						mtotal = Integer.parseInt(rs0.getString("total") != null && !rs0.getString("total").equals("")
+								? rs0.getString("total") : "0");
+						mtax = Integer.parseInt(rs0.getString("tax") != null && !rs0.getString("tax").equals("")
+								? rs0.getString("tax") : "0");
 						data[3 + i] = "" + (mtotal + mtax);
 						data[16 + i] = "" + mtax;
 						data[29 + i] = "" + mtotal;

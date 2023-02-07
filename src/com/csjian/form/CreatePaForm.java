@@ -14,7 +14,7 @@ public class CreatePaForm extends PdfPageEventHelper {
 		try {
 			BaseFont bfChinese = BaseFont.createFont("MHei-Medium", "UniCNS-UCS2-H", BaseFont.NOT_EMBEDDED);
 
-			PdfReader reader = new PdfReader(pdftemplate);
+			PdfReader reader = new PdfReader(new FileInputStream("d:/blankform/paform.pdf"));
 			PdfStamper stamp = new PdfStamper(reader, os);
 			AcroFields form = stamp.getAcroFields();
 			for (Iterator i = reader.getAcroForm().getFields().iterator(); i.hasNext();) {

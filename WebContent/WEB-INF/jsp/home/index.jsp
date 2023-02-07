@@ -7,7 +7,7 @@
       var winWidth = 640;
       //the center properties
       var winLeft = (screen.width - winWidth)/2;
-      newWindow = window.open('QA/playswf.jsp?id='+qano,windowName,'height=480,width=640,left=' + winLeft + ',top=50, resizable=no,scrollbars=no,status=no,titlebar=no');
+      newWindow = window.open('QA/QA.jsp?id='+qano,windowName,'height=800,width=1400,left=' + winLeft + ',top=50, resizable=no,scrollbars=no,status=no,titlebar=no');
     }
    //-->
   </SCRIPT>
@@ -25,13 +25,13 @@
   	<tr><td>&nbsp;&nbsp;</td></tr>
   	<tr><td>&nbsp;&nbsp;<a href="/doc/menu.doc" class=moduleTitle >二代健保系統操作說明書下載</a></td></tr>
     <tr><td>&nbsp;&nbsp;</td></tr>
-    <tr height="25"><td>&nbsp;&nbsp;1. <a href="#" onclick="ShowQA('1');">如何變更登入密碼 ?</a></td></tr>
-    <tr height="25"><td>&nbsp;&nbsp;2. <a href="#" onclick="ShowQA('2');">如何增加一筆新的員工資料 ?</a></td></tr>
-    <tr height="25"><td>&nbsp;&nbsp;3. <a href="#" onclick="ShowQA('3');">員工離職要如何設定 ?</a></td></tr>
-    <tr height="25"><td>&nbsp;&nbsp;4. <a href="#" onclick="ShowQA('4');">員工一些薪資項目的金額不太會改變，有什麼方式可以在輸入每月薪資時自動帶出，而不用重覆輸入 ?</a></td></tr>
-    <tr height="25"><td>&nbsp;&nbsp;5. <a href="#" onclick="ShowQA('5');">在輸入薪資資料時，發現有些薪資加項沒有要如何解決 ?</a></td></tr>
-    <tr height="25"><td>&nbsp;&nbsp;6. <a href="#" onclick="ShowQA('6');">在輸入薪資資料時，發現有些薪資減項沒有要如何解決 ?</a></td></tr>
-    <tr height="25"><td>&nbsp;&nbsp;7. <a href="#" onclick="ShowQA('7');">如何輸入每月的薪資資料 ?</a></td></tr>
-    <tr height="25"><td>&nbsp;&nbsp;8. <a href="#" onclick="ShowQA('8');">這個月的薪資資料和上個月的相似，可不可以直接拿上個月的資料來套用 ?</a></td></tr>
+    <tr height="25"><td>&nbsp;&nbsp;1. <a href="#" onclick="ShowQA('QA1');">如何變更登入密碼 ?</a></td></tr>
+    <tr height="25"><td>&nbsp;&nbsp;2. <a href="#" onclick="ShowQA('QA2');">如何增加一筆新的員工資料 ?</a></td></tr>
+    <tr height="25"><td>&nbsp;&nbsp;3. <a href="#" onclick="ShowQA('QA3');">員工離職要如何設定 ?</a></td></tr>
+    <tr height="25"><td>&nbsp;&nbsp;4. <a href="#" onclick="ShowQA('QA4');">員工一些薪資項目的金額不太會改變，有什麼方式可以在輸入每月薪資時自動帶出，而不用重覆輸入 ?</a></td></tr>
+    <tr height="25"><td>&nbsp;&nbsp;5. <a href="#" onclick="ShowQA('QA5');">在輸入薪資資料時，發現有些薪資加項沒有要如何解決 ?</a></td></tr>
+    <tr height="25"><td>&nbsp;&nbsp;6. <a href="#" onclick="ShowQA('QA6');">在輸入薪資資料時，發現有些薪資減項沒有要如何解決 ?</a></td></tr>
+    <tr height="25"><td>&nbsp;&nbsp;7. <a href="#" onclick="ShowQA('QA7');">如何輸入每月的薪資資料 ?</a></td></tr>
+    <tr height="25"><td>&nbsp;&nbsp;8. <a href="#" onclick="ShowQA('QA8');">這個月的薪資資料和上個月的相似，可不可以直接拿上個月的資料來套用 ?</a></td></tr>
     <tr height="25"><td>&nbsp;&nbsp;9. <a href="#" onclick="window.open('QA/9.htm','popupWindow','height=240,width=300,left=100, top=50, resizable=no,scrollbars=no,status=no,titlebar=no');">在報表列印的地方都有 "產生PDF報表"的按鈕，這是什麼 ? 要如何讀取 ?</a></td></tr>
   </table>

@@ -19,6 +19,11 @@
   var sequence = ["employees", "isdependantN", "isdependantY", "birth1", "name", "unicode", 
                   "code", "adate", "btnRemove"];
   
+  	$( function() {
+  		$( "#birth1" ).datepickerTW();
+  		$( "#adate" ).datepickerTW();
+	} );
+  
     function selEmp() {
       with (document.mainform) {
         dependant.style.display='none';
@@ -174,15 +179,6 @@
 	    return (true);
 	  else
 	    return (false);
-    }
-
-    function sDate(eventType) {
-      with (document.mainform) {
-        var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 250px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-        if (returnValue) {
-          eval(eventType + ".value=returnValue");
-        }
-      }
     }
 
 	var ALP_STR = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
@@ -669,7 +665,6 @@
             <tr bgcolor="#42A0FF">
               <td width="15%"><div align="right">員工出生日期：</div></td>
               <td colspan="3" align="left"><input name="birth1" id="birth1" value='<%=employees!=null&&employees.length>0?StringUtils.adToTw(employees[0].getBirthday()):""%>' type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("birth1");'>(格式YY-MM-DD 例如 95-5-24)
-              	&nbsp;<A href="javascript:sDate('birth1')"><IMG src="images/calendar.gif" border="0"></A>
               </td>
             </tr>
             <tr><td colspan=4>
@@ -700,7 +695,6 @@
               <td height="25" width="15%"><div align="right">退保日期：</td>
               <td height="25" colspan="3"><div align="left">
                 <input name="adate" id="adate" value='<%=today%>' type="text" class="textfield" size="10" maxlength="9" onChange='chkDate("adate");'>(格式YY-MM-DD 例如 95-5-24)
-              	&nbsp;<A href="javascript:sDate('adate')"><IMG src="images/calendar.gif" border="0"></A>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="Submit2" id="btnRemove" type="button" value="退保" onClick='addPerson();'>
                 </div>               
               </td>

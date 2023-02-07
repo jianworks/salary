@@ -21,8 +21,10 @@
   <!-- Begin
     function doSubmit() {
 	  with (document.sform) {
-	    returnValue=year.value + "-" + month.value;
-	    window.close();
+	    //returnValue=year.value + "-" + month.value;
+	    //window.close();
+	    window.opener.windowOpenReturnFunc(year.value + "-" + month.value);
+		window.close();
       }
     }  
 

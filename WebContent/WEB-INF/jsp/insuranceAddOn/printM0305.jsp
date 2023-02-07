@@ -15,7 +15,7 @@
 			"bLengthChange": false,
 			"bFilter": false,
 			"bJQueryUI": true,
-			"iDisplayLength": 10,
+			"iDisplayLength": 12,
 			"oLanguage": {
 			    "sLengthMenu": "每頁 _MENU_ 筆資料",
 			    "sZeroRecords": "",

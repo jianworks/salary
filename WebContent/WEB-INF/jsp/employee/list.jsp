@@ -45,6 +45,28 @@
                   }
 			}
 	    });
+		
+		$( "#dialog-confirm" ).dialog({
+		      resizable: false,
+		      height: "auto",
+		      width: 400,
+		      modal: true,
+		      autoOpen: false,
+		      buttons: {
+		        "確定": function() {
+		        	with (document.mainform) {
+		        		overwrite.value = $('input[name*=write]:checked').val();
+		            	pageno.value = "";
+		          		mainform.action = '<%=response.encodeURL("employee.do?action=transfer") %>';
+		          		submit();
+		        	}
+	          		$( this ).dialog( "close" );
+		        },
+		        "取消": function() {
+		          $( this ).dialog( "close" );
+		        }
+		      }
+		    });
   });
   
     function doAdd() {
@@ -92,14 +114,9 @@
     }
     
     function doTransfer() {   
-      var returnvalue = showModalDialog("misc/ConfirmOverWrite.htm", 'dialogArguments',"dialogHeight: 200px; dialogWidth: 320px; center: yes; scroll: no; status: no" );     
-      with (document.mainform) {
-		overwrite.value = returnvalue;
-        pageno.value = "";
-      	mainform.action = '<%=response.encodeURL("employee.do?action=transfer") %>';
-      	submit();
-      }
+    	$("#dialog-confirm").dialog("open");		
     }
+    
 
     function doSearch() {
 	  with (document.mainform) {
@@ -251,4 +268,10 @@
   
 <div id="importFileDlg" title="選擇匯入檔案">
 	選擇檔案：<input type="file" id="uploadFile" name="uploadFile"/>   	
+</div>
+
+<div id="dialog-confirm" title="覆蓋員工資料確認?">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>是否要覆蓋目前所選定的年度已建檔之員工資料 ?</p>
+  	<input name="write" type="radio" value="Y" checked>是
+    <input name="write" type="radio" value="N">否
 </div>

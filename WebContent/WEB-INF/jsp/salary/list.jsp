@@ -44,16 +44,23 @@
       }  
     }
 
+    var fieldName;
     function doCopyHistory() {
         with (document.mainform) {
-          var returnValue = window.showModalDialog("misc/selectMonth.jsp",'dialogArguments',"dialogHeight: 250px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-          if (returnValue != null) {
-			copyFrom.value=returnValue;
-			mainform.action = '<%=response.encodeURL("salary.do?action=copyHistory") %>';
-            mainform.submit();
-          }
+          	//var returnValue = window.showModalDialog("misc/selectMonth.jsp",'dialogArguments',"dialogHeight: 250px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
+          	window.open("misc/selectMonth.jsp", "_blank", "width=280px,height=250px");
         }
-      }
+    }
+    
+    function windowOpenReturnFunc(returnValue) {
+    	with (document.mainform) {
+    		if (returnValue != null) {
+				copyFrom.value=returnValue;
+				mainform.action = '<%=response.encodeURL("salary.do?action=copyHistory") %>';
+            	mainform.submit();
+          	}
+    	}
+    }
     
     function doCopyLastMonth() {
     	with (document.mainform) {

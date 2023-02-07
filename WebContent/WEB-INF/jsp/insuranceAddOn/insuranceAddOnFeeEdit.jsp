@@ -20,6 +20,11 @@
   	                "bossHealthInsuranceAmount", "ICAAmount", "annualICAAmount", "excludeDate", "incomeAmount67", 
   	                "trustNote67", "incomeAmount68", "trustNote68", "insuranceAddOnFee", "btnUpdate"];
   
+  	$( function() {
+  		$( "#incomeDate" ).datepickerTW();
+  		$( "#excludeDate" ).datepickerTW();
+	} );
+  
   	$(document).ready(function () {
       $("#unicode").autocomplete({
           source: "insuranceAddOn.do?action=incomeEarnerAutoCompleteList",
@@ -110,15 +115,6 @@
         value.charCodeAt(i)<256?nowChr++:nowChr+=2;
       }
       return nowChr;
-    }
-
-    function sDate(eventType) {
-      with (document.mainform) {
-        var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 280px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-        if (returnValue) {
-          eval(eventType + ".value=returnValue");
-        }
-      }
     }
 
     function chkDate(datename) {
@@ -225,8 +221,13 @@
         // 2016/1/1 費率由 2% 改為 1.91%, 65,66,67,68 門檻由 5000 升為 20000
  		var rate = 0.02;
  		var minGate = 5000;
- 		if (year > 104) {
+ 		if (year <=104) {
+ 		
+ 		} if (year > 104 && year <=109) {
  			rate = 0.0191;
+ 			minGate = 20000;
+ 		} else {
+ 			rate = 0.0211;
  			minGate = 20000;
  		}
  		
@@ -367,7 +368,6 @@
 	            <td class=dataLabel><div align="right">所得給付日期：</div></td>
 	            <td colspan="2" align="left">
 	              <input name="incomeDate" id="incomeDate" value="<%=!insuranceAddOnFee.getIncomeDate().equals("")?StringUtils.adToTw(insuranceAddOnFee.getIncomeDate()):today%>" type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("incomeDate");'> (格式 YY-MM-DD 例如 96-5-24)
-	              &nbsp;<A href="javascript:sDate('incomeDate')"><IMG src="images/calendar.gif" border="0"></A>
 	            </td>
 	          </tr>
 	          <tr>
@@ -450,8 +450,7 @@
 	          <tr>
 	            <td class=dataLabel width="20%"><div align="right">除權息基準日：</div></td>
 	            <td align="left">
-	            	<input name="excludeDate" id="excludeDate" value="<%=!insuranceAddOnFee.getExcludeDate().equals("")?StringUtils.adToTw(insuranceAddOnFee.getExcludeDate()):""%>" type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("excludeDate");'> (格式 YY-MM-DD 例如 95-3-21)&nbsp;
-	                <A href="javascript:sDate('excludeDate')"><IMG src="images/calendar.gif" border="0"></A>
+	            	<input name="excludeDate" id="excludeDate" value="<%=!insuranceAddOnFee.getExcludeDate().equals("")?StringUtils.adToTw(insuranceAddOnFee.getExcludeDate()):""%>" type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("excludeDate");'> (格式 YY-MM-DD 例如 95-3-21)
 	            </td>
 	          </tr>	
 	        </TBODY></TABLE>

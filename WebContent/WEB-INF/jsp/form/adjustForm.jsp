@@ -14,6 +14,10 @@
 
   <SCRIPT LANGUAGE="JavaScript">
   <!--
+  	$( function() {
+  		$( "#birth" ).datepickerTW();
+	} );
+  
     function selEmp() {
       with (document.mainform) {
         var emp = document.getElementById("employees").value.split("#");
@@ -44,14 +48,6 @@
 	    return (false);
     }
 
-    function sDate(eventType) {
-      with (document.mainform) {
-        var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 250px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-        if (returnValue) {
-          eval(eventType + ".value=returnValue");
-        }
-      }
-    }
     
     function sHealth() {
       with (document.mainform) {
@@ -215,7 +211,6 @@
               </td>
               <td class=dataLabel><div align="right">出生日期：</div></td>
               <td align="left"><input name="birth" id="birth" value='<%=employees!=null&&employees.length>0?StringUtils.adToTw(employees[0].getBirthday()):""%>' type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("birth");'>(格式 YY-MM-DD 例如 95-5-24)
-          		&nbsp;<A href="javascript:sDate('birth')"><IMG src="images/calendar.gif" border="0"></A>
           	  </td>
             </tr>
             <tr>

@@ -248,6 +248,26 @@
       </TD></TR></TBODY></TABLE>
     </td></tr>
     <tr><td colspan=3 height=10><hr/></td></tr>
+        <tr><td colspan=3>
+      <TABLE class=formOuterBorder cellSpacing=0 cellPadding=0 width="100%" border=0><TBODY><TR><TD>
+        <TABLE cellSpacing=1 cellPadding=0 width="100%" border=0>
+          <TBODY><TR><TH class=formSecHeader align=left>本月勞/健保投保薪資資料</TH></TR></TBODY>
+        </TABLE>
+        <TABLE cellSpacing=1 cellPadding=2 width="100%" border=0><TBODY>
+          <tr>
+            <td class=dataLabel><div align="right">勞保投保薪資：</div></td>
+            <td align="left"><input name="laborInsurance" value="<%=salary.getLaborInsurance().equals("0") ? (employee.getLaborInsurance()!=null ? employee.getLaborInsurance() : "0") : salary.getLaborInsurance()%>"  type="text" class="textfield" size="10" maxlength="10" readonly=true></td>
+            <td class=dataLabel><div align="right">健保投保薪資：</div></td>
+            <td align="left"><input name="healthInsurance" id="healthInsurance" value="<%=salary.getHealthInsurance().equals("0") ? (employee.getHealthInsurance()!=null ? employee.getHealthInsurance() : "0") : salary.getHealthInsurance()%>" type="text" class="textfield" size="10" maxlength="10"  readonly=true></td>
+          </tr>
+          <tr>
+            <td class=dataLabel width="20%"><div align="right">勞退提撥工資：</div></td>
+            <td colspan="3" align="left"><input name="laborRetireFee" id="laborRetireFee" value="<%=salary.getLaborRetireFee().equals("0") ? (employee.getLaborRetireFee()!=null ? employee.getLaborRetireFee() : "0") : salary.getLaborRetireFee()%>" type="text" class="textfield" size="10" maxlength="10" readonly=true></td>
+          </tr>
+        </TBODY></TABLE>
+      </TD></TR></TBODY></TABLE>
+    </td></tr>
+    <tr><td colspan=3 height="10"></td></tr>
     <tr>
       <td class=dataLabel width="20%"><div align="right">本薪小計：</div></td>
       <td align="left"><input name="btotal" value="<%=salary.getBtotal()%>" type="text" class="textfield" size="10" maxlength="10" readonly=true></td>
@@ -278,9 +298,6 @@
   <input type=hidden name="month" value="<%=salary.getMonth()%>"/>
   <input type=hidden name="totalp" value="<%=totalp%>"/>
   <input type=hidden name="totalm" value="<%=totalm%>"/>
-  <input type=hidden name="healthInsurance" value="<%=employee.getHealthInsurance()!=null?employee.getHealthInsurance():"0"%>"/>
-  <input type=hidden name="laborInsurance" value="<%=employee.getLaborInsurance()!=null?employee.getLaborInsurance():"0"%>"/>
-  <input type=hidden name="laborRetireFee" value="<%=employee.getLaborRetireFee()!=null?employee.getLaborRetireFee():"0"%>"/>
   <input type=hidden name="retireFee" value="<%=employee.getRetirefee()!=null?employee.getRetirefee():"0"%>"/>
   </form>
 </body>

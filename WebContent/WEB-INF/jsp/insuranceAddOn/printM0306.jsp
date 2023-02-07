@@ -68,8 +68,14 @@
 	}
 	
 	function calcAddOnFee() {
+		var year = parseInt($('#incomePeriod').val().substr(0, 3), 10);
+		
 		if (parseInt($('#salaryAmount').val(), 10) > parseInt($('#insuranceAmount').val(), 10)) {
-			$('#addOnFee').val(Math.round((parseInt($('#salaryAmount').val(), 10) - parseInt($('#insuranceAmount').val(), 10))*0.0191) );
+			if (year < 110) {
+				$('#addOnFee').val(Math.round((parseInt($('#salaryAmount').val(), 10) - parseInt($('#insuranceAmount').val(), 10))*0.0191) );
+			} else {
+				$('#addOnFee').val(Math.round((parseInt($('#salaryAmount').val(), 10) - parseInt($('#insuranceAmount').val(), 10))*0.0211) );
+			}
 		} else {
 			$('#addOnFee').val('0');
 		}

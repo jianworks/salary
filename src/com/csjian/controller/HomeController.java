@@ -117,7 +117,7 @@ public class HomeController extends BaseController {
 		sessionHelper.logout(req.getSession());
 		ModelAndView mav = welcome(req, res);		
 		
-		mav.addObject("msg", "已登出系統!");
+		//mav.addObject("msg", "已登出系統!");
 		return mav;
 	}
 

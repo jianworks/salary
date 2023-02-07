@@ -523,8 +523,10 @@ public class InsuranceAddOnDao extends TemplateDao {
 		// 2016/1/1 費率由 2% 改為 1.91%
 		if (year.equals("2015")) {
 			feeRate = 0.02;
-		} else {
+		} else if (year.equals("2016")||year.equals("2017")||year.equals("2018")||year.equals("2019")||year.equals("2020")) {
 			feeRate = 0.0191;
+		} else {
+			feeRate = 0.0211;
 		}
 		try {
 			Connection conn = this.dataSource.getConnection();

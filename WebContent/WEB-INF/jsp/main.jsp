@@ -7,7 +7,7 @@
 
 <head>
 <title>峻誠稅務記帳士事務所</title>
-<link rel="stylesheet" href="css/styles-1.0.css" type="text/css" />
+<link rel="stylesheet" href="css/styles-2.0.css" type="text/css" />
 <link rel="stylesheet" href="css/menu.css" type="text/css" />
 <link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.min.css" type="text/css" />
 <link rel="stylesheet" href="css/jquery.dataTables.css" type="text/css" />
@@ -18,9 +18,7 @@
 <script src="js/jquery.dataTables.min.js" type=text/javascript></script>
 <script src="js/common-1.0.js" type=text/javascript></script>
 <script src="js/menu-collapsed.js" type=text/javascript></script>
-    <!--[if (gte IE 6)&(lte IE 8)]>
-    <script src="js/selectivizr.js" type=text/javascript></script>
-    <![endif]-->
+<script src="js/datepickerTW-1.1.js" type=text/javascript></script>
 <style type="text/css">
 	#qna {
     	position: absolute;
@@ -82,7 +80,7 @@
 	<table style="height: 100%; width: 100%" border="0" cellspacing="0" cellpadding="0" >		
 		<tr align=left>
 			<td vAlign=top style="width:223px; background-image: url('images/buttunBg.gif'); background-repeat: y-repeat; background-position: center;">				
-			<a href="home.do?action=goodies" style="border:0px; border-color:#6BA613;">	
+				<a href="home.do?action=goodies" style="border:0px; border-color:#6BA613;">	
 				<IMG SRC="images/button.gif" style="margin-left:7px; border:0px; border-color:#6BA613;">
 			</a>
 				<ul id="menu">
@@ -155,10 +153,8 @@
 		</tr>
 	</table>
 	<div id="qna" class="noprint">
-      	<A href="home.do"><IMG hspace=4 src="images/help.gif" align=absMiddle border=0>網站使用教學</A>
-  </div>	
-  <div id="logout" class="noprint">
+      	<A href="home.do"><IMG hspace=4 src="images/help.gif" align=absMiddle border=0>網站使用教學</A>&nbsp;&nbsp;
       	<A href="<%=response.encodeURL("home.do?action=logout")%>" ><IMG hspace=4 src="images/logout.gif" align=absMiddle border=0>登出本系統</A>
-  </div>	
+  	</div>	
 </body>
 </html>

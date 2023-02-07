@@ -19,6 +19,11 @@
    	var sequence = ["name", "isnativeY", "isnativeN", "unicode", "address", "employeeno", "title", "birthday", "accountno", "onboarddate", 
                    "laborInsurance", "healthInsurance", "laborRetireFee", "retirefee", "resigndate", "btnUpdate"];
   	
+  	$( function() {
+  		$( "#birthday" ).datepickerTW();
+  		$( "#onboarddate" ).datepickerTW();
+  		$( "#resigndate" ).datepickerTW();
+	} );
   
     function doUpdate() {
     	var err = "";
@@ -88,15 +93,6 @@
         value.charCodeAt(i)<256?nowChr++:nowChr+=2;
       }
       return nowChr;
-    }
-
-    function sDate(eventType) {
-      with (document.mainform) {
-        var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 250px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-        if (returnValue) {
-          eval(eventType + ".value=returnValue");
-        }
-      }
     }
 
     function showResign(isshow) {
@@ -236,7 +232,6 @@
             <td class=dataLabel><div align="right">出生年月日：</div></td>
             <td colspan="2" align="left">
               <input name="birthday" id="birthday" value="<%=!employee.getBirthday().equals("")?StringUtils.adToTw(employee.getBirthday()):""%>" type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("birthday");' > (格式 YY-MM-DD 例如 96-5-24)
-              &nbsp;<A href="javascript:sDate('birthday')"><IMG src="images/calendar.gif" border="0"></A>
             </td>
           </tr>
           <tr>
@@ -247,7 +242,6 @@
             <td class=dataLabel><div align="right">到職日：</div></td>
             <td colspan="2" align="left">
               <input name="onboarddate" id="onboarddate" value="<%=!employee.getOnboarddate().equals("")?StringUtils.adToTw(employee.getOnboarddate()):today%>" type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("onboarddate");' > (格式 YY-MM-DD 例如 96-5-24)
-              &nbsp;<A href="javascript:sDate('onboarddate')"><IMG src="images/calendar.gif" border="0"></A>
             </td>
           </tr>
           <tr>
@@ -279,7 +273,6 @@
                 <td class=dataLabel width="20%"><div align="right">離職日期：</div></td>
                 <td colspan="2" align="left">
                   <input name="resigndate" id="resigndate" value="<%=StringUtils.adToTw(employee.getResigndate())%>" type="text" class="textfield" size="10" maxlength="10" onChange='chkDate("resigndate");'> (格式 YY-MM-DD 例如 96-5-24)
-                  &nbsp;<A href="javascript:sDate('resigndate')"><IMG src="images/calendar.gif" border="0"></A>
                 </td>
               </tr>
             </table></span>

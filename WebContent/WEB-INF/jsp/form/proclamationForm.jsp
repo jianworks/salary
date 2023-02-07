@@ -9,6 +9,13 @@ String[] tolist = {"中央健保署台北業務組", "中央健保署北區業�
 
   <SCRIPT LANGUAGE="JavaScript">
   <!--
+  
+  	$( function() {
+  		$( "#date0" ).datepickerTW();
+  		$( "#date1" ).datepickerTW();
+  		$( "#date2" ).datepickerTW();
+	} );
+  
 	function retrieveForm() {
       with (document.mainform) {
         location.href = "servlet/RetrieveBlankForm?form=proclamationform";
@@ -24,15 +31,7 @@ String[] tolist = {"中央健保署台北業務組", "中央健保署北區業�
 	  }
 	  return str;
     }
-    
-    function sDate(eventType) {
-        with (document.mainform) {
-          var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 280px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-          if (returnValue) {
-            eval(eventType + ".value=returnValue");
-          }
-        }
-      }
+  
 
   //-->
   </SCRIPT>
@@ -81,14 +80,11 @@ String[] tolist = {"中央健保署台北業務組", "中央健保署北區業�
             <td class=dataLabel width="20%"><div align="right">本單位係：</div></td>
             <td colspan="2" align="left">
               <input name="reason1" type="radio" value="0" checked >新設立之單位，設立核准日期：
-              <input name="date0" id="date0" value="" type="text" class="textfield" size="10" maxlength="10"> (格式 YY-MM-DD 例如 96-5-24)
-              &nbsp;<A href="javascript:sDate('date0')"><IMG src="images/calendar.gif" border="0"></A><br/>
+              <input name="date0" id="date0" value="" type="text" class="textfield" size="10" maxlength="10"> (格式 YY-MM-DD 例如 96-5-24)<br/>
               <input name="reason1" type="radio" value="1" >變更負責人之單位，變更核准日期：
-              <input name="date1" id="date1" value="" type="text" class="textfield" size="10" maxlength="10"> (格式 YY-MM-DD 例如 96-5-24)
-              &nbsp;<A href="javascript:sDate('date1')"><IMG src="images/calendar.gif" border="0"></A><br/>
+              <input name="date1" id="date1" value="" type="text" class="textfield" size="10" maxlength="10"> (格式 YY-MM-DD 例如 96-5-24)<br />
               <input name="reason1" type="radio" value="2" >復業之單位，復業核准日期：
-              <input name="date2" id="date2" value="" type="text" class="textfield" size="10" maxlength="10"> (格式 YY-MM-DD 例如 96-5-24)
-              &nbsp;<A href="javascript:sDate('date2')"><IMG src="images/calendar.gif" border="0"></A><br/>
+              <input name="date2" id="date2" value="" type="text" class="textfield" size="10" maxlength="10"> (格式 YY-MM-DD 例如 96-5-24)<br/>
               <input name="reason1" type="radio" value="3" >營業額在一定標準以下，免課所得稅之小規模營利單位<br/>             
               <input name="reason1" type="radio" value="4" >其它
               <input name="resontxt" value="" type="text" class="textfield" size="25" maxlength="20">

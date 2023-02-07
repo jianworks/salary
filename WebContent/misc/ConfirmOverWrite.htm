@@ -13,13 +13,15 @@
   <SCRIPT LANGUAGE="JavaScript">
   <!-- Begin
     function doSubmit() {
-	  with (document.sform) {
-		if (overwrite.checked)
-			returnValue = overwrite.value;
-		else  
-	    	returnValue="N";
-	    window.close();
-      }
+	  	with (document.sform) {
+	  		var overwrited;
+			if (overwrite.checked)
+				overwrited = overwrite.value;
+			else  
+				overwrited="N";
+			window.opener.windowOpenReturnFunc(overwrited);
+	    	window.close();
+      	}
     }  
 
   // End -->

@@ -20,7 +20,7 @@ public class CreateRemoveForm extends PdfPageEventHelper {
 
       for (int k=0; k<pages; k++) {
         pdflist[k] = "c:/temp/" + regcode + "_" + k + ".pdf";
-        PdfReader reader = new PdfReader(pdftemplate);
+        PdfReader reader = new PdfReader(new FileInputStream("d:/blankform/removeform.pdf"));
         PdfStamper stamp = new PdfStamper(reader, new FileOutputStream(pdflist[k]));
         AcroFields form = stamp.getAcroFields();
         for(Iterator i = reader.getAcroForm().getFields().iterator(); i.hasNext();) {
@@ -129,6 +129,7 @@ public class CreateRemoveForm extends PdfPageEventHelper {
         PRAcroForm form = reader.getAcroForm();
         if (form != null) writer.copyAcroForm(reader);
         f++;
+        reader.close();
       }
 
        // step 5: we close the document

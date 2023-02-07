@@ -19,45 +19,57 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  *
  */
 public class MailFormServlet extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
-    /* (non-Java-doc)
-     * @see javax.servlet.http.HttpServlet#HttpServlet()
-     */
-    public MailFormServlet() {
-    super();
-  }
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#HttpServlet()
+	 */
+	public MailFormServlet() {
+		super();
+	}
 
-  /* (non-Java-doc)
-   * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-   */
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-  	OutputStream os = response.getOutputStream();
-  	try {
-    	response.setHeader("Content-Transfer-Encoding","binary");
-      response.setHeader("Content-Disposition","attachment;filename=\"mailform.pdf" +"\"");
-      response.setContentType("application/pdf");
-      String regcode = request.getParameter("regcode")!=null?request.getParameter("regcode"):"";
-      String[] tocode = request.getParameterValues("tocode");
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest request,
+	 * HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		OutputStream os = response.getOutputStream();
+		try {
+			response.setHeader("Content-Transfer-Encoding", "binary");
+			response.setHeader("Content-Disposition", "attachment;filename=\"mailform.pdf" + "\"");
+			response.setContentType("application/pdf");
+			String regcode = request.getParameter("regcode") != null ? request.getParameter("regcode") : "";
+			String[] tocode = request.getParameterValues("tocode");
 
-      ServletContext servletContext = request.getSession().getServletContext();
-  		WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext); 
-  		DaoFactory daoFactory = (DaoFactory)wac.getBean("daoFactory");
+			ServletContext servletContext = request.getSession().getServletContext();
+			WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
+			DaoFactory daoFactory = (DaoFactory) wac.getBean("daoFactory");
 
-  		CompanyDao cdao = (CompanyDao)daoFactory.createDao(DaoFactory.COMPANY);
-  		CompanyBean company = cdao.getCompany(regcode);
-  		daoFactory.returnDao(DaoFactory.COMPANY, cdao);
-  		
-      (new CreateMailForm()).generatePDF(regcode, tocode, this.getServletContext().getResourceAsStream("/WEB-INF/blankform/mailform.pdf"), company, os);
-    } catch (Exception e) {
-    } finally {
-      os.flush();
-      os.close();
-    }
-  }
+			CompanyDao cdao = (CompanyDao) daoFactory.createDao(DaoFactory.COMPANY);
+			CompanyBean company = cdao.getCompany(regcode);
+			daoFactory.returnDao(DaoFactory.COMPANY, cdao);
 
-  /* (non-Java-doc)
-   * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-   */
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doGet(request, response);
-  }
+			(new CreateMailForm()).generatePDF(regcode, tocode,
+					this.getServletContext().getResourceAsStream("/WEB-INF/blankform/mailform.pdf"), company, os);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			os.flush();
+			os.close();
+		}
+	}
+
+	/*
+	 * (non-Java-doc)
+	 * 
+	 * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request,
+	 * HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
 }

@@ -14,11 +14,17 @@
 %>
 
 <script src="js/nextField.js" type=text/javascript></script>
-  <script type=text/javascript>
-  <!--
-  var sequence = ["employees", "isdependantN", "isdependantY", "salary", "birth1", "name", "relation", "unicode", 
+ <script type=text/javascript>
+ <!--
+  
+  	var sequence = ["employees", "isdependantN", "isdependantY", "salary", "birth1", "name", "relation", "unicode", 
                   "birth2", "adate", "btnAdd"];
 
+ 	$( function() {
+ 		$( "#birth1" ).datepickerTW();
+ 		$( "#birth2" ).datepickerTW();
+ 		$( "#adate" ).datepickerTW();
+	} );
   
     function selEmp() {
       with (document.mainform) {
@@ -59,15 +65,6 @@
 	    return (true);
 	  else
 	    return (false);
-    }
-
-    function sDate(eventType) {
-      with (document.mainform) {
-        var returnValue = window.showModalDialog("misc/calendar.html",'dialogArguments',"dialogHeight: 250px; dialogWidth: 280px; center: yes; scroll: no; status: no" );
-        if (returnValue) {
-          eval(eventType + ".value=returnValue");
-        }
-      }
     }
 
 	var ALP_STR = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
@@ -499,7 +496,6 @@
               <td width="30%" align="left"><input name="salary" id="salary" value='<%=employees!=null&&employees.length>0?employees[0].getGovinsurance():""%>' type="text" class="textfield" size="15" maxlength="10">&nbsp;&nbsp;<A href="javascript:sHealth()">薪資級距金額一覽表</A></td>
               <td width="15%"><div align="right">員工出生日期：</div></td>
               <td align="left"><input name="birth1" id="birth1" value='<%=employees!=null&&employees.length>0?StringUtils.adToTw(employees[0].getBirthday()):""%>' type="text" class="textfield" size="10" maxlength="9" onChange='chkDate("birth1");'>(格式 YY-MM-DD 例如 95-5-24)
-           		&nbsp;<A href="javascript:sDate('birth1')"><IMG src="images/calendar.gif" border="0"></A>
           	  </td>
             </tr>
             <tr bgcolor="#FE9934"><td colspan=4>
@@ -520,14 +516,12 @@
                   <td width="15%"><div align="right">眷屬出生日期：</div></td>
                   <td align="left">
                     <input name="birth2" id="birth2" type="text" class="textfield" size="10" maxlength="9" onChange='chkDate("birth2");'>(格式 YY-MM-DD 例如 95-5-24)
-              		&nbsp;<A href="javascript:sDate('birth2')"><IMG src="images/calendar.gif" border="0"></A>
               	  </td>
                 </tr>
               </table></span>
             </td></tr>
             <tr><td height="25" colspan="4" align=right>
                	 加保日期：<input name="adate" id="adate" value="<%=today%>" type="text" class="textfield" size="10" maxlength="9" onChange='chkDate("adate");'>(格式 YY-MM-DD 例如 95-5-24)
-                &nbsp;<A href="javascript:sDate('adate')"><IMG src="images/calendar.gif" border="0"></A>
                 &nbsp;&nbsp;&nbsp;&nbsp;<input name="Submit2" id="btnAdd" type="button" class='ui-state-default' value="加入" onClick='addPerson();'>&nbsp;&nbsp;&nbsp;&nbsp;
             </td></tr>
 
